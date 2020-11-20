@@ -4,4 +4,8 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     });
 });
 var api = typeof chrome!="undefined" ? chrome : browser;
-api.tabs.create({url: "./options.html"});
+api.runtime.onInstalled.addListener(function(details){
+  if ("install"===details.reason) {
+    api.tabs.create({url: "./options.html"});
+  }
+});
