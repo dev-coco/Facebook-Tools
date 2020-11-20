@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
     "name": "Facebook小工具",
-    "description": "目前支持的功能：好友列印，点赞列印，小组智能搜索，取消发送的好友请求，移除系统推荐的好友，Excel超链接文本合并。",
+    "description": "功能详情请看选项说明页面。",
     "author": "dev-coco",
-    "version": "1.0.9",
+    "version": "2.0",
     "browser_action": {
       "default_icon": "icon.png"
     },
@@ -16,6 +16,14 @@
         "scripts" : ["background.js"],
         "persistent" : false
     },
+    "content_scripts": [
+        {
+            "matches": ["https://m.facebook.com/privacy/touch/block/confirm/*"],
+            "js": ["block.js"],
+            "run_at": "document_end",
+            "all_frames": true
+        }
+    ],
     "permissions": [
       "<all_urls>",
       "tabs",
