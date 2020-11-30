@@ -3,6 +3,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
         file: 'inject.js'
     });
 });
+
 var api = typeof chrome!="undefined" ? chrome : browser;
 api.runtime.onInstalled.addListener(function(details){
   if ("install"===details.reason) {

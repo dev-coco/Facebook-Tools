@@ -10,6 +10,7 @@
     var count_requests = check_url.match(/sentfriendrequests/g);
     var story = check_url.match(/stories\/archive/g);
     var pokes = check_url.match(/pokes/g);
+    var group = check_url.match(/groups/g);
     // 取消好友请求
     if (cancel_request == "friends/center/requests") {
         var inputs = document.getElementsByClassName('_54k8 _52jg _56bs _26vk _2b4n _8yzq _3cqr _8yo0 _56bt');
@@ -46,8 +47,9 @@
             var picture = getdata[i].match(/(?<=img src=").*?(?=")/g);
             var url = getdata[i].match(/(?<=<a class="_4kk6" href=").*?(?=">)/g);
             var name = getdata[i].match(/(?<=profile picture">).*?(?=<div class="_6kl0">)/g);
-            document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + username + "</td><td>" + account_name + "</td><td>=IMAGE(\"" + picture + "\")</td><td>" + [i+1] + "</td><td></td><td></td><td>" + name + "</td><td>https://www.facebook.com" + url + "</td><td>快拍</td></tr></tbody></table>");
+            document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + username + "</td><td>" + account_name + "</td><td>" + [i+1] + "</td><td>" + name + "</td><td>https://www.facebook.com" + url + "</td><td>快拍</td></tr></tbody></table>");
         }
+        // 头像 <td>=IMAGE(\"" + picture + "\")</td>
         var d = document.documentElement.outerHTML;
         var e = d.replace(/<div class="simplemarker-mark" style="background-color: rgba\(255, 255, 255, 0\); display: inline; text-align: center; color: red; padding: 2px;">|<\/div>/g, "");
         document.open();
@@ -86,7 +88,7 @@
             for (var i = 0; i < c.length; i++) {
                 var url = c[i].match(/https:\/\/www\.facebook.*?(?=.fref|&amp)/g);
                 var k = c[i].match(/(?<=data-hovercard-prefer-more-content.*?>).+/g);
-                document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + g + "</td><td>" + account + "</td><td></td><td>" + [i] + "</td><td>" + k + "</td><td></td><td></td><td>" + url + "</td></tr></tbody></table>");
+                document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + g + "</td><td>" + account + "</td><td>" + [i] + "</td><td>" + k + "</td><td>" + url + "</td></tr></tbody></table>");
             }
             var d = document.documentElement.outerHTML;
             var e = d.replace(/<div class="simplemarker-mark" style="background-color: rgba\(255, 255, 255, 0\); display: inline; text-align: center; color: red; padding: 2px;">|<\/div>/g, "");
@@ -103,10 +105,10 @@
             var date = new Date();
             var nowDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             for (var i = 0; i < c.length; i++) {
-                var friends = c[i].match(/http.+(?=" role="link")/g);
+                var url = c[i].match(/http.+(?=" role="link")/g);
                 var k = c[i].match(/(?<=dir="auto">).+/g);
                 (function(i) {
-                    document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + g + "</td><td>" + f[0] + "</td><td></td><td>" + i + "</td><td>" + k + "</td><td></td><td></td><td>" + friends + "</td></tr></tbody></table>");
+                    document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + g + "</td><td>" + f[0] + "</td><td>" + i + "</td><td>" + k + "</td><td>" + url + "</td></tr></tbody></table>");
                 })(i)
             }
             var d = document.documentElement.outerHTML;
@@ -134,6 +136,50 @@
         var search_keyword = prompt("请输入关键词", "");
         var search_id = check_url.match(/(?<=filters=).+/g);
         window.location.href = "https://www.facebook.com/search/groups?q=" + search_keyword + "&filters=" + search_id;
+    }
+    // 小组信息
+    else if (group == "groups") {
+        var group_location = get_html.match(/(?<=group_locations":\[{"id":".*?","name":").*?(?=","__typename")/g);
+        if (group_location == null) {
+            var group_location = "";
+        } else {}
+        try {
+            var last_month_posts = get_html.match(/(?<=number_of_posts_in_last_month":).*?(?=,")/g)[0];
+        } catch {
+            var last_month_posts = "0";
+        }
+        try {
+            var all_member = get_html.match(/(?<=group_member_profiles.*?count":).*?(?=\})/g)[0];
+        } catch {
+            var all_member = "0";
+        }
+        try {
+            var new_member = get_html.match(/(?<=group_new_member_profiles":{"count":).*?(?=\})/g)[0];
+        } catch {
+            var new_member = "0";
+        }
+        try {
+            var group_status = get_html.match(/(?<=privacy_info.*?text":").*?(?="\})/g)[0];
+        } catch {
+            var group_status = "";
+        }
+        try {
+            var group_name = get_html.match(/(?<=isProfile":"Group","name":").*?(?=",")/g)[0];
+        } catch {
+            var group_name = "";
+        }
+        var url = (location.href + "/").match(/http.+oups\/.*?\//g)[0].replace(/\/$/g, "");
+        var keyword = RegExp(/god|bible|church|fellowship|christ|baptist|presbyterian|gospel|catholic|holy|jesus|lord|ministry|kingdom|religion/);
+        var check_keyword = keyword.test(group_name.toLowerCase());
+        if (check_keyword == true) {
+            var religion = "宗派";
+        } else {
+            var religion = "外邦";
+        }
+        var date = new Date();
+        var today = (date.getMonth() + 1) + "/" + date.getDate();
+        var str = "<table><tbody><tr><td>" + today + "</td><td></td><td></td><td>" + group_location + "</td><td>" + religion + "</td><td>" + group_name + "</td><td></td><td>" + url + "</td><td>" + all_member + "</td><td>" + last_month_posts + "</td><td>" + new_member + "</td><td>" + group_status + "</td></tr></tbody></table>"
+        document.write(eval("'" + str + "'"));
     }
     // 点赞列印
     else {
