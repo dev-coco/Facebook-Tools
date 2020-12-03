@@ -11,6 +11,9 @@
     var story = check_url.match(/stories\/archive/g);
     var pokes = check_url.match(/pokes/g);
     var group = check_url.match(/groups/g);
+    var watch_party = check_url.match(/\/wp\/|watchparty/g);
+    var all_group = check_url.match(/groups_browse/g);
+    var hiden_mark = check_url.match(/\?add/g);
     // 取消好友请求
     if (cancel_request == "friends/center/requests") {
         var inputs = document.getElementsByClassName('_54k8 _52jg _56bs _26vk _2b4n _8yzq _3cqr _8yo0 _56bt');
@@ -33,7 +36,7 @@
     }
     // 统计发送好友请求数
     else if (count_requests == "sentfriendrequests") {
-        var today_request = get_html.match(/(?<=<div class="_55wo _56bf">).*?(?=<\/section><\/div><\/div)/g)[0].match(/class="_56cz"/g);
+        var today_request = get_html.match(/(?<=<div class="_55wo _56bf">).*?(?=<\/section><\/div>)/g)[0].match(/class="_56cz"/g);
         alert("发送 " + today_request.length + " 个请求");
     }
     // 列印快拍
@@ -76,6 +79,25 @@
             })(i);
         }
     }
+    // 隐藏标记
+    else if (hiden_mark == "?add") {
+        var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
+        for (var i = 0; i < get_user.length; i++) {
+            var Mark = get_user[i].getElementsByClassName('simplemarker-mark')[0];
+            if (Mark != null) {
+                get_user[i].setAttribute("style", "display:none;");
+            } else {
+            }
+        }
+        var get_group_user = document.querySelectorAll('div[data-visualcompletion="ignore-dynamic"]')
+        for (var i = 0; i < get_group_user.length; i++) {
+            var Mark = get_group_user[i].getElementsByClassName('simplemarker-mark')[0];
+            if (Mark != null) {
+                get_group_user[i].setAttribute("style", "display:none;");
+            } else {
+            }
+        }
+ }
     // 列印好友
     else if (url_type == "friends") {
         if (check_version == "ios:url") {
@@ -137,6 +159,38 @@
         var search_id = check_url.match(/(?<=filters=).+/g);
         window.location.href = "https://www.facebook.com/search/groups?q=" + search_keyword + "&filters=" + search_id;
     }
+    // 开包厢节省CPU
+    else if (watch_party == "watchparty" || watch_party == "/wp/") {
+        var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+        var video_iframe = iframeDocument.getElementsByClassName("_1gm- _114e")[0];
+        try {
+            var status = video_iframe.style.display;
+        } catch {
+            video_iframe.style.display = "none";
+        }
+        if (status == "none") {
+            video_iframe.style.display = "block";
+        } else {
+            video_iframe.style.display = "none";
+        }
+    }
+    // 列印所有小组
+    else if (all_group == "groups_browse") {
+        var get_data = get_html.match(/(?<=<div class="_7hkf _3qn7 _61-3 _2fyi _3qng">).*?(?=<\/div>)/g);
+        for (var i=0;i<get_data.length;i++){
+        var group_name = get_data[i].match(/(?<=<div class=" _52je _52jb _52jh">).*/g);
+        var group_url = get_data[i].match(/(?<=<a class="_7hkg" href=").*?(?=\/\?ref=group_browse">)/g);
+        document.write("<table><tbody><tr><td>"+group_name+"</td><td>https://www.facebook.com"+group_url+"</td></tr></tbody></table>");
+        }
+//        var d = document.documentElement.outerHTML;
+//        var e = d.replace(/<div class="simplemarker-mark" style="background-color: rgba\(255, 255, 255, 0\); display: inline; text-align: center; color: red; padding: 2px;">|<\/div>/g, "");
+//        document.open();
+//        document.clear();
+//        document.close();
+//        for (var i = 0; i < e.length; i++) {
+//            document.write(e[i]);
+//        }
+    }
     // 小组信息
     else if (group == "groups") {
         var group_location = get_html.match(/(?<=group_locations":\[{"id":".*?","name":").*?(?=","__typename")/g);
@@ -179,7 +233,7 @@
         var date = new Date();
         var today = (date.getMonth() + 1) + "/" + date.getDate();
         var str = "<table><tbody><tr><td>" + today + "</td><td></td><td></td><td>" + group_location + "</td><td>" + religion + "</td><td>" + group_name + "</td><td></td><td>" + url + "</td><td>" + all_member + "</td><td>" + last_month_posts + "</td><td>" + new_member + "</td><td>" + group_status + "</td></tr></tbody></table>"
-        document.write(eval("'" + str + "'"));
+        document.write(eval("`" + str + "`"));
     }
     // 点赞列印
     else {
