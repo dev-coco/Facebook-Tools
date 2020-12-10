@@ -256,28 +256,31 @@
                                           document.getElementById("CPU_save").innerHTML="性能优化(关闭)";
                                       }
                                   }
-                                  // 统计留言数
+                                  // 统计留言数1s
                                   function comment_count() {
-                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                                      var comment = iframeDocument.getElementsByClassName("_3b-9");
-                                      var comment_num = comment.length-1;
-                                      document.getElementById("comment_count").innerHTML="当前评论："+comment_num;
+                                      var auto_count_comment = setInterval(function() {
+                                          var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                          var comment = iframeDocument.getElementsByClassName("_3b-9");
+                                          var comment_num = comment.length - 1;
+                                          document.getElementById("comment_count").innerHTML = "当前评论：" + comment_num;
+                                      }, 1000);
                                   }
                               </script>
                               </head>
-                              <div class="dropdown">
+                              <div id="facebook_tools" class="dropdown">
                                 <img width="48px;" src="https://dev-coco.github.io/images/arrow_button.png" class="img" />
                                 <div class="dropdown-content">
-                              <button class="button green" onclick="invite_online_fast()">邀请在线好友(快)</button>
-                              <button class="button green" onclick="invite_online_normal()">邀请在线好友(正常)</button>
-                              <button class="button blue" onclick="invite_fast()">自动邀请(快)</button>
-                              <button class="button blue" onclick="invite_normal()">自动邀请(正常)</button>
-                              <button class="button red" id="CPU_save" onclick="CPU_save()">性能优化</button>
-                              <button class="button red" id="comment_count" onclick="comment_count()">当前评论：</button>
-                              <div>
+                                    <button class="button green" onclick="invite_online_fast()">邀请在线好友(快)</button>
+                                    <button class="button green" onclick="invite_online_normal()">邀请在线好友(正常)</button>
+                                    <button class="button blue" onclick="invite_fast()">自动邀请(快)</button>
+                                    <button class="button blue" onclick="invite_normal()">自动邀请(正常)</button>
+                                    <button class="button red" id="CPU_save" onclick="CPU_save()">性能优化</button>
+                                    <button class="button red" id="comment_count" onclick="comment_count()">当前评论：</button>
+                                </div>
                               </div>
                 `;
-                $("body").prepend(new_button);
+                         if ($("#facebook_tools").length == 0)
+                         $("body").prepend(new_button);
             });
     }
     // 列印所有小组
