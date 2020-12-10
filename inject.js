@@ -13,7 +13,7 @@
     var group = check_url.match(/groups/g);
     var watch_party = check_url.match(/\/wp\/|watchparty/g);
     var all_group = check_url.match(/groups_browse/g);
-    var hiden_mark = check_url.match(/\?add/g);
+    var hiden_mark = check_url.match(/\?add|%3Fadd/g);
     // 取消好友请求
     if (cancel_request == "friends/center/requests") {
         var inputs = document.getElementsByClassName('_54k8 _52jg _56bs _26vk _2b4n _8yzq _3cqr _8yo0 _56bt');
@@ -80,7 +80,7 @@
         }
     }
     // 隐藏标记
-    else if (hiden_mark == "?add") {
+    else if (hiden_mark == "?add" || hiden_mark == "%3Fadd") {
         var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
         for (var i = 0; i < get_user.length; i++) {
             var Mark = get_user[i].getElementsByClassName('simplemarker-mark')[0];
@@ -159,20 +159,126 @@
         var search_id = check_url.match(/(?<=filters=).+/g);
         window.location.href = "https://www.facebook.com/search/groups?q=" + search_keyword + "&filters=" + search_id;
     }
-    // 开包厢节省CPU
+    // 开包厢辅助
     else if (watch_party == "watchparty" || watch_party == "/wp/") {
-        var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-        var video_iframe = iframeDocument.getElementsByClassName("_1gm- _114e")[0];
-        try {
-            var status = video_iframe.style.display;
-        } catch {
-            video_iframe.style.display = "none";
-        }
-        if (status == "none") {
-            video_iframe.style.display = "block";
-        } else {
-            video_iframe.style.display = "none";
-        }
+       $(document).ready(function() {
+                new_button = `
+                              <head>
+                              <meta charset="utf-8">
+                              <link rel="stylesheet" type="text/css" href="https://dev-coco.github.io/css/Facebook-Tools.css">
+                              <script>
+                                  // 邀请在线好友1-3s
+                                  function invite_online_fast() {
+                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                      var online = iframeDocument.getElementsByClassName('_71ua');
+                                      var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                                          function getRandom (n, m) {
+                                          var num = Math.floor(Math.random() * (m - n + 1) + n)
+                                          return num
+                                      }
+                                      var ramdom_number = getRandom(1000, 3000)
+                                      alert("在线用户："+online.length);
+                                      for (var i=0;i<online.length;i++){
+                                              (function(i) {
+                                              setTimeout(function() {
+                                              inputs[i].click();
+                                              }, ramdom_number * i);
+                                          })(i);
+                                      }
+                                  }
+                                  // 邀请在线好友5-8s
+                                  function invite_online_normal() {
+                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                      var online = iframeDocument.getElementsByClassName('_71ua');
+                                      var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                                          function getRandom (n, m) {
+                                          var num = Math.floor(Math.random() * (m - n + 1) + n)
+                                          return num
+                                      }
+                                      var ramdom_number = getRandom(5000, 8000)
+                                      alert("在线用户："+online.length);
+                                      for (var i=0;i<online.length;i++){
+                                              (function(i) {
+                                              setTimeout(function() {
+                                              inputs[i].click();
+                                              }, ramdom_number * i);
+                                          })(i);
+                                      }
+                                  }
+                                  // 邀请成员1-3s
+                                  function invite_fast() {
+                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                      var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                                          function getRandom (n, m) {
+                                          var num = Math.floor(Math.random() * (m - n + 1) + n)
+                                          return num
+                                      }
+                                      var ramdom_number = getRandom(1000, 3000)
+                                      for (var i=0;i<inputs.length;i++){
+                                              (function(i) {
+                                              setTimeout(function() {
+                                              inputs[i].click();
+                                              }, ramdom_number * i);
+                                          })(i);
+                                      }
+                                  }
+                                  // 邀请成员5-8s
+                                  function invite_normal() {
+                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                      var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                                          function getRandom (n, m) {
+                                          var num = Math.floor(Math.random() * (m - n + 1) + n)
+                                          return num
+                                      }
+                                      var ramdom_number = getRandom(5000, 8000)
+                                      for (var i=0;i<inputs.length;i++){
+                                              (function(i) {
+                                              setTimeout(function() {
+                                              inputs[i].click();
+                                              }, ramdom_number * i);
+                                          })(i);
+                                      }
+                                  }
+                                  // 开包厢节省CPU
+                                  function CPU_save() {
+                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                      var video_iframe = iframeDocument.getElementsByClassName("_1gm- _114e")[0];
+                                      try {
+                                          var status = video_iframe.style.display;
+                                      } catch {
+                                          video_iframe.style.display = "none";
+                                      }
+                                      if (status == "none") {
+                                          video_iframe.style.display = "block";
+                                          document.getElementById("CPU_save").innerHTML="性能优化(开启)";
+                                      } else {
+                                          video_iframe.style.display = "none";
+                                          document.getElementById("CPU_save").innerHTML="性能优化(关闭)";
+                                      }
+                                  }
+                                  // 统计留言数
+                                  function comment_count() {
+                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                      var comment = iframeDocument.getElementsByClassName("_3b-9");
+                                      var comment_num = comment.length-1;
+                                      document.getElementById("comment_count").innerHTML="当前评论："+comment_num;
+                                  }
+                              </script>
+                              </head>
+                              <div class="dropdown">
+                                <img width="48px;" src="https://dev-coco.github.io/images/arrow_button.png" class="img" />
+                                <div class="dropdown-content">
+                              <button class="button green" onclick="invite_online_fast()">邀请在线好友(快)</button>
+                              <button class="button green" onclick="invite_online_normal()">邀请在线好友(正常)</button>
+                              <button class="button blue" onclick="invite_fast()">自动邀请(快)</button>
+                              <button class="button blue" onclick="invite_normal()">自动邀请(正常)</button>
+                              <button class="button red" id="CPU_save" onclick="CPU_save()">性能优化</button>
+                              <button class="button red" id="comment_count" onclick="comment_count()">当前评论：</button>
+                              <div>
+                              </div>
+                `;
+                $("body").prepend(new_button);
+            });
     }
     // 列印所有小组
     else if (all_group == "groups_browse") {
