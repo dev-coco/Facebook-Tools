@@ -50,7 +50,7 @@
             var picture = getdata[i].match(/(?<=img src=").*?(?=")/g);
             var url = getdata[i].match(/(?<=<a class="_4kk6" href=").*?(?=">)/g);
             var name = getdata[i].match(/(?<=profile picture">).*?(?=<div class="_6kl0">)/g);
-            document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + username + "</td><td>" + account_name + "</td><td>" + [i+1] + "</td><td>" + name + "</td><td>https://www.facebook.com" + url + "</td><td>快拍</td></tr></tbody></table>");
+            document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + username + "</td><td>" + account_name + "</td><td>" + [i + 1] + "</td><td>" + name + "</td><td>https://www.facebook.com" + url + "</td><td>快拍</td></tr></tbody></table>");
         }
         // 头像 <td>=IMAGE(\"" + picture + "\")</td>
         var d = document.documentElement.outerHTML;
@@ -81,27 +81,26 @@
     }
     // 隐藏标记
     else if (hiden_mark == "?add" || hiden_mark == "%3Fadd") {
-        var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
-        for (var i = 0; i < get_user.length; i++) {
-            var Mark = get_user[i].getElementsByClassName('simplemarker-mark')[0];
-            if (Mark != null) {
-                get_user[i].setAttribute("style", "display:none;");
-            } else {
+        setInterval(function() {
+            var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
+            for (var i = 0; i < get_user.length; i++) {
+                var Mark = get_user[i].getElementsByClassName('simplemarker-mark')[0];
+                if (Mark != null) {
+                    get_user[i].setAttribute("style", "display:none;");
+                } else {}
             }
-        }
-        var get_group_user = document.querySelectorAll('div[data-visualcompletion="ignore-dynamic"]')
-        for (var i = 0; i < get_group_user.length; i++) {
-            var Mark = get_group_user[i].getElementsByClassName('simplemarker-mark')[0];
-            if (Mark != null) {
-                get_group_user[i].setAttribute("style", "display:none;");
-            } else {
+            var get_group_user = document.querySelectorAll('div[data-visualcompletion="ignore-dynamic"]')
+            for (var i = 0; i < get_group_user.length; i++) {
+                var Mark = get_group_user[i].getElementsByClassName('simplemarker-mark')[0];
+                if (Mark != null) {
+                    get_group_user[i].setAttribute("style", "display:none;");
+                } else {}
             }
-        }
- }
+        }, 1500);
+    }
     // 列印好友
     else if (url_type == "friends") {
         if (check_version == "ios:url") {
-
             var c = get_html.match(/(?<=<div class="fsl fwb fcb"><a href=").*?(?=<\/a><\/div>)/g);
             var account = get_html.match(/(?<=<span class="_1vp5">).*?(?=<\/span>)/g);
             var g = prompt("请输入名字", "");
@@ -161,188 +160,302 @@
     }
     // 开包厢辅助
     else if (watch_party == "watchparty" || watch_party == "/wp/") {
-       $(document).ready(function() {
-                new_button = `
-                              <head>
-                              <meta charset="utf-8">
-                              <link rel="stylesheet" type="text/css" href="https://dev-coco.github.io/css/Facebook-Tools.css">
-                              <script>
-                                  // 邀请在线好友1-3s
-                                  function invite_online_fast() {
-                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                                      var online = iframeDocument.getElementsByClassName('_71ua');
-                                      var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
-                                          function getRandom (n, m) {
-                                          var num = Math.floor(Math.random() * (m - n + 1) + n)
-                                          return num
-                                      }
-                                      var ramdom_number = getRandom(1000, 3000)
-                                      alert("在线用户："+online.length);
-                                      for (var i=0;i<online.length;i++){
-                                              (function(i) {
-                                              setTimeout(function() {
-                                              inputs[i].click();
-                                              }, ramdom_number * i);
-                                          })(i);
-                                      }
-                                  }
-                                  // 邀请在线好友5-8s
-                                  function invite_online_normal() {
-                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                                      var online = iframeDocument.getElementsByClassName('_71ua');
-                                      var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
-                                          function getRandom (n, m) {
-                                          var num = Math.floor(Math.random() * (m - n + 1) + n)
-                                          return num
-                                      }
-                                      var ramdom_number = getRandom(5000, 8000)
-                                      alert("在线用户："+online.length);
-                                      for (var i=0;i<online.length;i++){
-                                              (function(i) {
-                                              setTimeout(function() {
-                                              inputs[i].click();
-                                              }, ramdom_number * i);
-                                          })(i);
-                                      }
-                                  }
-                                  // 邀请成员1-3s
-                                  function invite_fast() {
-                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                                      var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
-                                          function getRandom (n, m) {
-                                          var num = Math.floor(Math.random() * (m - n + 1) + n)
-                                          return num
-                                      }
-                                      var ramdom_number = getRandom(1000, 3000)
-                                      for (var i=0;i<inputs.length;i++){
-                                              (function(i) {
-                                              setTimeout(function() {
-                                              inputs[i].click();
-                                              }, ramdom_number * i);
-                                          })(i);
-                                      }
-                                  }
-                                  // 邀请成员5-8s
-                                  function invite_normal() {
-                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                                      var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
-                                          function getRandom (n, m) {
-                                          var num = Math.floor(Math.random() * (m - n + 1) + n)
-                                          return num
-                                      }
-                                      var ramdom_number = getRandom(5000, 8000)
-                                      for (var i=0;i<inputs.length;i++){
-                                              (function(i) {
-                                              setTimeout(function() {
-                                              inputs[i].click();
-                                              }, ramdom_number * i);
-                                          })(i);
-                                      }
-                                  }
-                                  // 开包厢节省CPU
-                                  function CPU_save() {
-                                      var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                                      var video_iframe = iframeDocument.getElementsByClassName("_1gm- _114e")[0];
-                                      try {
-                                          var status = video_iframe.style.display;
-                                      } catch {
-                                          video_iframe.style.display = "none";
-                                      }
-                                      if (status == "none") {
-                                          video_iframe.style.display = "block";
-                                          document.getElementById("CPU_save").innerHTML="性能优化(开启)";
-                                      } else {
-                                          video_iframe.style.display = "none";
-                                          document.getElementById("CPU_save").innerHTML="性能优化(关闭)";
-                                      }
-                                  }
-                                  // 统计留言数1s
-                                  function comment_count() {
-                                      var auto_count_comment = setInterval(function() {
-                                          var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                                          var comment = iframeDocument.getElementsByClassName("_3b-9");
-                                          var comment_num = comment.length - 1;
-                                          document.getElementById("comment_count").innerHTML = "当前评论：" + comment_num;
-                                      }, 1000);
-                                  }
-                              </script>
-                              </head>
-                              <div id="facebook_tools" class="dropdown">
-                                <img width="48px;" src="https://dev-coco.github.io/images/arrow_button.png" class="img" />
-                                <div class="dropdown-content">
-                                    <button class="button green" onclick="invite_online_fast()">邀请在线好友(快)</button>
-                                    <button class="button green" onclick="invite_online_normal()">邀请在线好友(正常)</button>
-                                    <button class="button blue" onclick="invite_fast()">自动邀请(快)</button>
-                                    <button class="button blue" onclick="invite_normal()">自动邀请(正常)</button>
-                                    <button class="button red" id="CPU_save" onclick="CPU_save()">性能优化</button>
-                                    <button class="button red" id="comment_count" onclick="comment_count()">当前评论：</button>
-                                </div>
-                              </div>
-                `;
-                         if ($("#facebook_tools").length == 0)
-                         $("body").prepend(new_button);
-            });
+        $(document).ready(function() {
+            new_button = `
+                         <head>
+                         <meta charset="utf-8">
+                         <link rel="stylesheet" type="text/css" href="https://dev-coco.github.io/css/Facebook-Tools.css">
+                         <script>
+                           // 邀请在线好友1-3s
+                           function invite_online_fast() {
+                         try {
+                               var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                         } catch {
+                         var iframeDocument = document;
+                         }
+                        
+                                   var online = iframeDocument.getElementsByClassName('_71ua');
+                                   var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             
+                                
+
+                               function getRandom(n, m) {
+                                   var num = Math.floor(Math.random() * (m - n + 1) + n)
+                                   return num
+                               }
+                               var ramdom_number = getRandom(1000, 2500)
+                               alert("在线用户：" + online.length);
+                               for (var i = 0; i < online.length; i++) {
+                                   (function (i) {
+                                       setTimeout(function () {
+                                           inputs[i].click();
+                                           document.getElementById("invite_count").innerHTML = "已邀请：" + [i + 1];
+                                       }, ramdom_number * i);
+                                   })(i);
+                               }
+                           }
+                           // 邀请在线好友5-8s
+                           function invite_online_normal() {
+                         try {
+                               var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                         } catch {
+                         var iframeDocument = document;
+                         }
+                          
+                                   var online = iframeDocument.getElementsByClassName('_71ua');
+                                   var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                              
+
+                               function getRandom(n, m) {
+                                   var num = Math.floor(Math.random() * (m - n + 1) + n)
+                                   return num
+                               }
+                               var ramdom_number = getRandom(3000, 5000)
+                               alert("在线用户：" + online.length);
+                               for (var i = 0; i < online.length; i++) {
+                                   (function (i) {
+                                       setTimeout(function () {
+                                           inputs[i].click();
+                                           document.getElementById("invite_count").innerHTML = "已邀请：" + [i + 1];
+                                       }, ramdom_number * i);
+                                   })(i);
+                               }
+                           }
+                           var time = 200;
+                           var timeOut = null;
+                           // 邀请成员超快
+                           function invite_very_fast(e) {
+                               clearTimeout(timeOut);
+                         try {
+                               var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                         } catch {
+                         var iframeDocument = document;
+                         }
+                               
+                                   var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                               
+
+                               function getRandom(n, m) {
+                                   var num = Math.floor(Math.random() * (m - n + 1) + n)
+                                   return num
+                               }
+                               document.getElementById("invite_speed").innerHTML = "自动邀请(极速)";
+                               var ramdom_number = getRandom(500, 800)
+                               for (var i = 0; i < inputs.length; i++) {
+                                   (function (i) {
+                                       setTimeout(function () {
+                                           inputs[i].click();
+                                           document.getElementById("invite_count").innerHTML = "已邀请：" + [i + 1];
+                                       }, ramdom_number * i);
+                                   })(i);
+                               }
+                           }
+                           // 邀请成员1-3s
+                           function invite_fast(e) {
+                               clearTimeout(timeOut);
+                               timeOut = setTimeout(function () {
+                                                    try {
+                                   var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                                    } catch {
+                                                    var iframeDocument = document;
+                                                    }
+                             
+                                       var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                                  
+
+                                   function getRandom(n, m) {
+                                       var num = Math.floor(Math.random() * (m - n + 1) + n)
+                                       return num
+                                   }
+                                   document.getElementById("invite_speed").innerHTML = "自动邀请(快)";
+                                   var ramdom_number = getRandom(1000, 2500)
+                                   for (var i = 0; i < inputs.length; i++) {
+                                       (function (i) {
+                                           setTimeout(function () {
+                                               inputs[i].click();
+                                               document.getElementById("invite_count").innerHTML = "已邀请：" + [i + 1];
+                                           }, ramdom_number * i);
+                                       })(i);
+                                   }
+                               }, time)
+                           }
+                           // 邀请成员5-8s
+                           function invite_normal() {
+                         try {
+                               var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                         } catch {
+                         var iframeDocument = document;
+                         }
+                              
+                                   var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             
+
+                               function getRandom(n, m) {
+                                   var num = Math.floor(Math.random() * (m - n + 1) + n)
+                                   return num
+                               }
+                               var ramdom_number = getRandom(3000, 5000)
+                               for (var i = 0; i < inputs.length; i++) {
+                                   (function (i) {
+                                       setTimeout(function () {
+                                           inputs[i].click();
+                                           document.getElementById("invite_count").innerHTML = "已邀请：" + [i + 1];
+                                       }, ramdom_number * i);
+                                   })(i);
+                               }
+                           }
+                           // 开包厢节省CPU
+                           function CPU_save() {
+                         try {
+                               var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                         } catch {
+                         var iframeDocument = document;
+                         }
+                               
+                                   var video_iframe = iframeDocument.getElementsByClassName("_1gm- _114e")[0];
+                             
+                               try {
+                                   var status = video_iframe.style.display;
+                               } catch {
+                                   video_iframe.style.display = "none";
+                               }
+                               if (status == "none") {
+                                   video_iframe.style.display = "block";
+                                   document.getElementById("CPU_save").innerHTML = "性能优化(开启)";
+                               } else {
+                                   video_iframe.style.display = "none";
+                                   document.getElementById("CPU_save").innerHTML = "性能优化(关闭)";
+                               }
+                           }
+                           // 统计留言数1s
+                           function comment_count() {
+                               var auto_count_comment = setInterval(function () {
+                                   
+                                   try {
+                                       var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                       var comment = iframeDocument.getElementsByClassName("_3b-9");
+                                       var comment_num = comment.length - 1;
+                                   } catch {
+                                       var comment = document.getElementsByClassName("_3b-9");
+                                       var comment_num = comment.length / 2 - 1;
+                                   }
+
+                                   document.getElementById("comment_count").innerHTML = "当前评论：" + comment_num;
+                               }, 1000);
+                           }
+                         </script>
+                         </head>
+                         <div id="facebook_tools" class="dropdown">
+                           <img width="48px;" src="https://dev-coco.github.io/images/arrow_button.png" class="img" />
+                           <div class="dropdown-content">
+                               <div id="invite_count"></div>
+                               <button class="button green" onclick="invite_online_fast()">邀请在线好友(快)</button>
+                               <button class="button green" onclick="invite_online_normal()">邀请在线好友(正常)</button>
+                               <button class="button blue" id="invite_speed" onclick="invite_fast(event)" ondblclick="invite_very_fast(event)">自动邀请(快)</button>
+                               <button class="button blue" onclick="invite_normal()">自动邀请(正常)</button>
+                               <button class="button red" id="CPU_save" onclick="CPU_save()">性能优化</button>
+                               <button class="button red" id="comment_count" onclick="comment_count()">当前评论：</button>
+                           </div>
+                         </div>
+
+           `;
+            if ($("#facebook_tools").length == 0)
+                $("body").prepend(new_button);
+        });
     }
     // 列印所有小组
     else if (all_group == "groups_browse") {
         var get_data = get_html.match(/(?<=<div class="_7hkf _3qn7 _61-3 _2fyi _3qng">).*?(?=<\/div>)/g);
-        for (var i=0;i<get_data.length;i++){
-        var group_name = get_data[i].match(/(?<=<div class=" _52je _52jb _52jh">).*/g);
-        var group_url = get_data[i].match(/(?<=<a class="_7hkg" href=").*?(?=\/\?ref=group_browse">)/g);
-        document.write("<table><tbody><tr><td>"+group_name+"</td><td>https://www.facebook.com"+group_url+"</td></tr></tbody></table>");
+        for (var i = 0; i < get_data.length; i++) {
+            var group_name = get_data[i].match(/(?<=<div class=" _52je _52jb _52jh">).*/g);
+            var group_url = get_data[i].match(/(?<=<a class="_7hkg" href=").*?(?=\/\?ref=group_browse">)/g);
+            document.write("<table><tbody><tr><td>" + group_name + "</td><td>https://www.facebook.com" + group_url + "</td></tr></tbody></table>");
         }
-//        var d = document.documentElement.outerHTML;
-//        var e = d.replace(/<div class="simplemarker-mark" style="background-color: rgba\(255, 255, 255, 0\); display: inline; text-align: center; color: red; padding: 2px;">|<\/div>/g, "");
-//        document.open();
-//        document.clear();
-//        document.close();
-//        for (var i = 0; i < e.length; i++) {
-//            document.write(e[i]);
-//        }
+        //        var d = document.documentElement.outerHTML;
+        //        var e = d.replace(/<div class="simplemarker-mark" style="background-color: rgba\(255, 255, 255, 0\); display: inline; text-align: center; color: red; padding: 2px;">|<\/div>/g, "");
+        //        document.open();
+        //        document.clear();
+        //        document.close();
+        //        for (var i = 0; i < e.length; i++) {
+        //            document.write(e[i]);
+        //        }
     }
     // 小组信息
     else if (group == "groups") {
-        var group_location = get_html.match(/(?<=group_locations":\[{"id":".*?","name":").*?(?=","__typename")/g);
-        if (group_location == null) {
-            var group_location = "";
-        } else {}
-        try {
-            var last_month_posts = get_html.match(/(?<=number_of_posts_in_last_month":).*?(?=,")/g)[0];
-        } catch {
-            var last_month_posts = "0";
-        }
-        try {
-            var all_member = get_html.match(/(?<=group_member_profiles.*?count":).*?(?=\})/g)[0];
-        } catch {
-            var all_member = "0";
-        }
-        try {
-            var new_member = get_html.match(/(?<=group_new_member_profiles":{"count":).*?(?=\})/g)[0];
-        } catch {
-            var new_member = "0";
-        }
-        try {
-            var group_status = get_html.match(/(?<=privacy_info.*?text":").*?(?="\})/g)[0];
-        } catch {
-            var group_status = "";
-        }
-        try {
-            var group_name = get_html.match(/(?<=isProfile":"Group","name":").*?(?=",")/g)[0];
-        } catch {
-            var group_name = "";
-        }
-        var url = (location.href + "/").match(/http.+oups\/.*?\//g)[0].replace(/\/$/g, "");
-        var keyword = RegExp(/god|bible|church|fellowship|christ|baptist|presbyterian|gospel|catholic|holy|jesus|lord|ministry|kingdom|religion/);
-        var check_keyword = keyword.test(group_name.toLowerCase());
-        if (check_keyword == true) {
-            var religion = "宗派";
+
+        var f = prompt("请输入点赞类型，留空则列印小组信息。", "");
+        if (f != null && f != "") {
+            var b = get_html.match(/<div class="j83agx80 cbu4d94t buofh1pr l9j0dhe7">.*?k4urcfbm"><\/div><\/div><\/div>/g);
+            for (var i = 0; i < b.length; i++) {
+                document.write(b[i]);
+            }
+            var c = document.documentElement.outerHTML;
+            var rt = c.match(/<div class="ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi a8c37x1j">.*?<div class="q9uorilb">.*?<\/a><\/div>/g);
+            document.open();
+            document.clear();
+            document.close();
+
+            for (var k = 0; k < rt.length; k++) {
+
+                var v = rt[k].match(/(?<=xlink:href=").*?(?=")/g);
+                var e = rt[k].match(/(?<=class=""><a aria-label=").*?(?=")/g)
+                var d = "https://www.facebook.com/" + rt[k].match(/(?<=lrazzd5p" href="\/groups\/.*?\/user\/).*?(?=\/.__cf|.amp)/g);
+                document.write("<table><tbody><tr><td>=IMAGE(\"" + v + "\")</td><td>" + f + "</td><td><a href=\"" + d + "\">" + e + "</a></td><td>" + d + "</td></tr></tbody></table>");
+            }
+            var g = document.documentElement.outerHTML;
+            setTimeout(function() {
+                var d = document.documentElement.outerHTML;
+                var e = d.replace(/<div class="simplemarker-mark" style="background-color: rgba\(255, 255, 255, 0\); display: inline; text-align: center; color: red; padding: 2px;">|<\/div>/g, "");
+                document.open();
+                document.clear();
+                document.close();
+                for (var i = 0; i < e.length; i++) {
+                    document.write(e[i]);
+                }
+            }, 2000);
         } else {
-            var religion = "外邦";
+            var group_location = get_html.match(/(?<=group_locations":\[{"id":".*?","name":").*?(?=","__typename")/g);
+            if (group_location == null) {
+                var group_location = "";
+            } else {}
+            try {
+                var last_month_posts = get_html.match(/(?<=number_of_posts_in_last_month":).*?(?=,")/g)[0];
+            } catch {
+                var last_month_posts = "0";
+            }
+            try {
+                var all_member = get_html.match(/(?<=group_member_profiles.*?count":).*?(?=\})/g)[0];
+            } catch {
+                var all_member = "0";
+            }
+            try {
+                var new_member = get_html.match(/(?<=group_new_member_profiles":{"count":).*?(?=\})/g)[0];
+            } catch {
+                var new_member = "0";
+            }
+            try {
+                var group_status = get_html.match(/(?<=privacy_info.*?text":").*?(?="\})/g)[0];
+            } catch {
+                var group_status = "";
+            }
+            try {
+                var group_name = get_html.match(/(?<=isProfile":"Group","name":").*?(?=",")/g)[0];
+            } catch {
+                var group_name = "";
+            }
+            var url = (location.href + "/").match(/http.+oups\/.*?\//g)[0].replace(/\/$/g, "");
+            var keyword = RegExp(/god|bible|church|fellowship|christ|baptist|presbyterian|gospel|catholic|holy|jesus|lord|ministry|kingdom|religion/);
+            var check_keyword = keyword.test(group_name.toLowerCase());
+            if (check_keyword == true) {
+                var religion = "宗派";
+            } else {
+                var religion = "外邦";
+            }
+            var date = new Date();
+            var today = (date.getMonth() + 1) + "/" + date.getDate();
+            var str = "<table><tbody><tr><td>" + today + "</td><td></td><td></td><td>" + group_location + "</td><td>" + religion + "</td><td>" + group_name + "</td><td></td><td>" + url + "</td><td>" + all_member + "</td><td>" + last_month_posts + "</td><td>" + new_member + "</td><td>" + group_status + "</td></tr></tbody></table>"
+            document.write(eval("`" + str + "`"));
         }
-        var date = new Date();
-        var today = (date.getMonth() + 1) + "/" + date.getDate();
-        var str = "<table><tbody><tr><td>" + today + "</td><td></td><td></td><td>" + group_location + "</td><td>" + religion + "</td><td>" + group_name + "</td><td></td><td>" + url + "</td><td>" + all_member + "</td><td>" + last_month_posts + "</td><td>" + new_member + "</td><td>" + group_status + "</td></tr></tbody></table>"
-        document.write(eval("`" + str + "`"));
     }
     // 点赞列印
     else {
