@@ -84,14 +84,42 @@
             var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
             for (var i = 0; i < get_user.length; i++) {
                 var Mark = get_user[i].getElementsByClassName('simplemarker-mark')[0];
-                if (Mark != null) {
+                try {
+                    var Mark_Date = Mark.outerHTML.match(/..\/.*?\/..(?=<)|..\/.*?\/.(?=<)/g);
+                } catch {}
+                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️/);
+                try {
+                    if (Mark.outerHTML.match(reg)) {
+                        var aa = "TRUE";
+                    }
+                } catch {
+                    var aa = "FALSE";
+                }
+                var date = new Date();
+                var dateTime = new Date(date.setDate(date.getDate() - 30));
+                var date2 = new Date(20 + Mark_Date);
+                if (Mark != null && dateTime.getTime() < date2.getTime() || aa == "TRUE") {
                     get_user[i].setAttribute("style", "display:none;");
                 } else {}
             }
             var get_group_user = document.querySelectorAll('div[data-visualcompletion="ignore-dynamic"]')
             for (var i = 0; i < get_group_user.length; i++) {
                 var Mark = get_group_user[i].getElementsByClassName('simplemarker-mark')[0];
-                if (Mark != null) {
+                try {
+                    var Mark_Date = Mark.outerHTML.match(/..\/.*?\/..(?=<)|..\/.*?\/.(?=<)/g);
+                } catch {}
+                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️/);
+                try {
+                    if (Mark.outerHTML.match(reg)) {
+                        var aa = "TRUE";
+                    }
+                } catch {
+                    var aa = "FALSE";
+                }
+                var date = new Date();
+                var dateTime = new Date(date.setDate(date.getDate() - 30));
+                var date2 = new Date(20 + Mark_Date);
+                if (Mark != null && dateTime.getTime() < date2.getTime() || aa == "TRUE") {
                     get_group_user[i].setAttribute("style", "display:none;");
                 } else {}
             }
