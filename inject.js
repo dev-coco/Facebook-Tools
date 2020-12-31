@@ -14,6 +14,7 @@
     var watch_party = check_url.match(/\/wp\/|watchparty/g);
     var all_group = check_url.match(/groups_browse/g);
     var hiden_mark = check_url.match(/\?add|%3Fadd/g);
+    var hide_all_mark = check_url.match(/\?hidemark|%3Fhidemark/g);
     var find_mark = check_url.match(/\?findmark|%3Ffindmark/g);
     var conversion_num_id = check_url.match(/\?cnumid|%3Fcnumid/g);
     var conversion_real_id = check_url.match(/\?crealid|%3Fcrealid/g);
@@ -81,7 +82,26 @@
             })(i);
         }
     }
-    // 隐藏标记
+    // 隐藏所有标记
+    else if (hide_all_mark == "?hidemark" || hiden_mark == "%3Fhidemark") {
+        setInterval(function() {
+            var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
+            for (var i = 0; i < get_user.length; i++) {
+                var Mark = get_user[i].getElementsByClassName('simplemarker-mark')[0];
+                if (Mark != null) {
+                    get_user[i].setAttribute("style", "display:none;");
+                } else {}
+            }
+            var get_group_user = document.querySelectorAll('div[data-visualcompletion="ignore-dynamic"]')
+            for (var i = 0; i < get_group_user.length; i++) {
+                var Mark = get_group_user[i].getElementsByClassName('simplemarker-mark')[0];
+                if (Mark != null) {
+                    get_group_user[i].setAttribute("style", "display:none;");
+                } else {}
+            }
+        }, 1500);
+    }
+    // 智能隐藏标记
     else if (hiden_mark == "?add" || hiden_mark == "%3Fadd") {
         setInterval(function() {
             var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
@@ -90,7 +110,7 @@
                 try {
                     var Mark_Date = Mark.outerHTML.match(/..\/.*?\/..(?=<)|..\/.*?\/.(?=<)/g);
                 } catch {}
-                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️/);
+                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️|🎈|◾️|🔴/);
                 try {
                     if (Mark.outerHTML.match(reg)) {
                         var aa = "TRUE";
@@ -111,7 +131,7 @@
                 try {
                     var Mark_Date = Mark.outerHTML.match(/..\/.*?\/..(?=<)|..\/.*?\/.(?=<)/g);
                 } catch {}
-                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️|🎈/);
+                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️|🎈|◾️|🔴/);
                 try {
                     if (Mark.outerHTML.match(reg)) {
                         var aa = "TRUE";
