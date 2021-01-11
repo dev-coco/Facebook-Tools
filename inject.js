@@ -18,6 +18,7 @@
     var find_mark = check_url.match(/\?findmark|%3Ffindmark/g);
     var conversion_num_id = check_url.match(/\?cnumid|%3Fcnumid/g);
     var conversion_real_id = check_url.match(/\?crealid|%3Fcrealid/g);
+    var online = check_url.match(/online/g);
     // 取消好友请求
     if (cancel_request == "friends/center/requests") {
         var inputs = document.getElementsByClassName('_54k8 _52jg _56bs _26vk _2b4n _8yzq _3cqr _8yo0 _56bt');
@@ -26,6 +27,16 @@
             setTimeout(function() {
                 location.reload();
             }, 2700);
+        }
+    }
+    // 列印在线好友
+    else if (online == "online") {
+        var online_list = document.querySelectorAll("div.rq0escxv.lpgh02oy.du4w35lb.pad24vr5.rirtxc74.dp1hu0rb.fer614ym.hlyrhctz.o387gat7.qbu88020.ni8dbmo4.stjgntxs.czl6b2yu > div > div > div.j83agx80.cbu4d94t.buofh1pr.l9j0dhe7 > div > div:nth-child(2) > div > div.cxgpxx05.sj5x9vvc > div > ul")[0]
+        var online_name = online_list.outerHTML.match(/(?<=zawbc8m" dir="auto").*?(?=<\/span>)/g);
+        new_page = window.open('');
+        for (var i = 0; i < online_name.length; i++) {
+            var str = online_name[i].replace(/>/g, "@");
+            new_page.document.write(`<table><tbody><tr><td>` + [i + 1] + `</td><td>` + str + `</td></tr></tbody></table>`);
         }
     }
     // 移除系统推荐好友
@@ -253,13 +264,21 @@
                       <script>
                          // 邀请在线好友1-2.5s
                          function invite_online_fast() {
-                          try {
-                             var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                          } catch {
-                             var iframeDocument = document;
-                          }
+                             try {
+                                 if (document.querySelectorAll("#facebook_comment_show").length == 1) {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[1].contentDocument;
+                                 } else {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                 }
+                             } catch {}
+                             try {
                                  var online = iframeDocument.getElementsByClassName('_71ua');
                                  var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             } catch {
+                                 var online = document.getElementsByClassName('_71ua');
+                                 var inputs = document.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             }
+
                              function getRandom(n, m) {
                                  var num = Math.floor(Math.random() * (m - n + 1) + n)
                                  return num
@@ -277,13 +296,21 @@
                          }
                          // 邀请在线好友3-5s
                          function invite_online_normal() {
-                          try {
-                             var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                          } catch {
-                             var iframeDocument = document;
-                          }
+                             try {
+                                 if (document.querySelectorAll("#facebook_comment_show").length == 1) {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[1].contentDocument;
+                                 } else {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                 }
+                             } catch {}
+                             try {
                                  var online = iframeDocument.getElementsByClassName('_71ua');
                                  var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             } catch {
+                                 var online = document.getElementsByClassName('_71ua');
+                                 var inputs = document.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             }
+
                              function getRandom(n, m) {
                                  var num = Math.floor(Math.random() * (m - n + 1) + n)
                                  return num
@@ -304,12 +331,19 @@
                          // 邀请成员超快
                          function invite_very_fast(e) {
                              clearTimeout(timeOut);
-                          try {
-                             var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                          } catch {
-                             var iframeDocument = document;
-                          }
+                             try {
+                                 if (document.querySelectorAll("#facebook_comment_show").length == 1) {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[1].contentDocument;
+                                 } else {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                 }
+                             } catch {}
+                             try {
                                  var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             } catch {
+                                 var inputs = document.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             }
+
                              function getRandom(n, m) {
                                  var num = Math.floor(Math.random() * (m - n + 1) + n)
                                  return num
@@ -329,12 +363,19 @@
                          function invite_fast(e) {
                              clearTimeout(timeOut);
                              timeOut = setTimeout(function() {
-                                                  try {
-                                 var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                                                  } catch {
-                                                     var iframeDocument = document;
-                                                  }
+                                 try {
+                                     if (document.querySelectorAll("#facebook_comment_show").length == 1) {
+                                         var iframeDocument = document.getElementsByTagName("iframe")[1].contentDocument;
+                                     } else {
+                                         var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                     }
+                                 } catch {}
+                                 try {
                                      var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                                 } catch {
+                                     var inputs = document.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                                 }
+
                                  function getRandom(n, m) {
                                      var num = Math.floor(Math.random() * (m - n + 1) + n)
                                      return num
@@ -353,12 +394,19 @@
                          }
                          // 邀请成员3-5s
                          function invite_normal() {
-                          try {
-                             var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                          } catch {
-                             var iframeDocument = document;
-                          }
+                             try {
+                                 if (document.querySelectorAll("#facebook_comment_show").length == 1) {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[1].contentDocument;
+                                 } else {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                 }
+                             } catch {}
+                             try {
                                  var inputs = iframeDocument.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             } catch {
+                                 var inputs = document.getElementsByClassName('_71u9 _4jy0 _4jy3 _517h _51sy _42ft');
+                             }
+
                              function getRandom(n, m) {
                                  var num = Math.floor(Math.random() * (m - n + 1) + n)
                                  return num
@@ -375,12 +423,18 @@
                          }
                          // 开包厢节省CPU
                          function CPU_save() {
-                          try {
-                             var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                          } catch {
-                             var iframeDocument = document;
-                          }
+                             try {
+                                 if (document.querySelectorAll("#facebook_comment_show").length == 1) {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[1].contentDocument;
+                                 } else {
+                                     var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                 }
+                             } catch {}
+                             try {
                                  var video_iframe = iframeDocument.getElementsByClassName("_1gm- _114e")[0];
+                             } catch {
+                                 var video_iframe = document.getElementsByClassName("_1gm- _114e")[0];
+                             }
                              try {
                                  var status = video_iframe.style.display;
                              } catch {
@@ -397,13 +451,21 @@
                          // 统计留言数1s
                          function comment_count() {
                              var auto_count_comment = setInterval(function() {
-                                                                  try {
-                                 var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
-                                                                  } catch {
-                                                                     var iframeDocument = document;
-                                                                  }
+                                 try {
+                                     if (document.querySelectorAll("#facebook_comment_show").length == 1) {
+                                         var iframeDocument = document.getElementsByTagName("iframe")[1].contentDocument;
+                                     } else {
+                                         var iframeDocument = document.getElementsByTagName("iframe")[0].contentDocument;
+                                     }
+                                 } catch {}
+                                 try {
                                      var comment = iframeDocument.getElementsByClassName("_3b-9");
                                      var comment_num = comment.length - 1;
+                                 } catch {
+                                     var comment = document.getElementsByClassName("_3b-9");
+                                     var comment_num = comment.length / 2 - 1;
+                                 }
+
                                  document.getElementById("comment_count").innerHTML = "当前评论：" + comment_num;
                              }, 1000);
                          }

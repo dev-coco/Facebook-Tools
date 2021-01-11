@@ -3,7 +3,7 @@
     "name": "Facebook小工具",
     "description": "功能详情请看选项说明页面。",
     "author": "dev-coco",
-    "version": "2.3.1",
+    "version": "2.3.5",
     "browser_action": {
       "default_icon": "icon.png"
     },
@@ -28,6 +28,18 @@
             "*://*.facebook.com/*"
           ],
           "js": ["jquery-3.4.1.min.js","watch_party.js"]
+        },
+        {
+          "matches": [
+            "https://*.facebook.com/friends/center/requests/*"
+          ],
+          "js": ["jquery-3.4.1.min.js","cancel_request.js"]
+        },
+        {
+            "matches": ["https://m.facebook.com/composer/*"],
+            "js": ["token.js"],
+            "run_at": "document_end",
+            "all_frames": true
         }
     ],
     "permissions": [
