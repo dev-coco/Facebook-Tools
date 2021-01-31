@@ -54,9 +54,10 @@
     else if (count_add_friends == "category_key=friends") {
         var get_data = document.getElementsByClassName("_56cx acw");
         new_page = window.open('');
+        new_page.document.write(`<p>添加好友数</p>`);
         for (var i = 0; i < get_data.length; i++)
         {
-            var date = get_data[i].outerHTML.match(/(?<=<section class="_56cz _56c_">).*?(?=<\/section>)/g)[0];
+            var date = get_data[i].outerHTML.match(/(?<=<section class="_56cz _56c.*?">).*?(?=<\/section>)/g)[0];
             var friend_count = get_data[i].getElementsByClassName("img darkTouch profpic").length;
             new_page.document.write(`<table><tbody><tr><td>`+date+`</td><td>`+friend_count+`</td></tr></tbody></table>`);
         }
@@ -65,9 +66,10 @@
     else if (count_requests == "sentfriendrequests") {
         var get_data = document.getElementsByClassName("_56cx acw");
         new_page = window.open('');
+        new_page.document.write(`<p>发送好友请求数</p>`);
         for (var i = 0; i < get_data.length; i++)
         {
-            var date = get_data[i].outerHTML.match(/(?<=<section class="_56cz _56c_">).*?(?=<\/section>)/g)[0];
+            var date = get_data[i].outerHTML.match(/(?<=<section class="_56cz _56c.*?">).*?(?=<\/section>)/g)[0];
             var friend_requests = get_data[i].getElementsByClassName("_56d3 _50wk").length;
             new_page.document.write(`<table><tbody><tr><td>`+date+`</td><td>`+friend_requests+`</td></tr></tbody></table>`);
         }
