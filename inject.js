@@ -8,6 +8,7 @@
     var check_version = get_html.match(/ios:url/g);
     var search = check_url.match(/com\/search\//g);
     var count_requests = check_url.match(/sentfriendrequests/g);
+    var count_add_friends = check_url.match(/category_key=friends/g);
     var story = check_url.match(/stories\/archive/g);
     var pokes = check_url.match(/pokes/g);
     var group = check_url.match(/groups/g);
@@ -31,7 +32,7 @@
     }
     // 列印在线好友
     else if (online == "online") {
-        var online_list = document.querySelectorAll("div.rq0escxv.lpgh02oy.du4w35lb.pad24vr5.rirtxc74.dp1hu0rb.fer614ym.hlyrhctz.o387gat7.qbu88020.ni8dbmo4.stjgntxs.czl6b2yu > div > div > div.j83agx80.cbu4d94t.buofh1pr.l9j0dhe7 > div > div:nth-child(2) > div > div.cxgpxx05.sj5x9vvc > div > ul")[0]
+        var online_list = document.querySelectorAll("div > div > div.j83agx80.cbu4d94t.buofh1pr.l9j0dhe7 > div > div> div > div.cxgpxx05.sj5x9vvc > div > ul")[0]
         var online_name = online_list.outerHTML.match(/(?<=zawbc8m" dir="auto").*?(?=<\/span>)/g);
         new_page = window.open('');
         for (var i = 0; i < online_name.length; i++) {
@@ -49,10 +50,27 @@
             }, 2000);
         }
     }
+    // 统计添加好友数
+    else if (count_add_friends == "category_key=friends") {
+        var get_data = document.getElementsByClassName("_56cx acw");
+        new_page = window.open('');
+        for (var i = 0; i < get_data.length; i++)
+        {
+            var date = get_data[i].outerHTML.match(/(?<=<section class="_56cz _56c_">).*?(?=<\/section>)/g)[0];
+            var friend_count = get_data[i].getElementsByClassName("img darkTouch profpic").length;
+            new_page.document.write(`<table><tbody><tr><td>`+date+`</td><td>`+friend_count+`</td></tr></tbody></table>`);
+        }
+    }
     // 统计发送好友请求数
     else if (count_requests == "sentfriendrequests") {
-        var today_request = get_html.match(/(?<=<div class="_55wo _56bf">).*?(?=<\/section><\/div>)/g)[0].match(/class="_56cz"/g);
-        alert("发送 " + today_request.length + " 个请求");
+        var get_data = document.getElementsByClassName("_56cx acw");
+        new_page = window.open('');
+        for (var i = 0; i < get_data.length; i++)
+        {
+            var date = get_data[i].outerHTML.match(/(?<=<section class="_56cz _56c_">).*?(?=<\/section>)/g)[0];
+            var friend_requests = get_data[i].getElementsByClassName("_56d3 _50wk").length;
+            new_page.document.write(`<table><tbody><tr><td>`+date+`</td><td>`+friend_requests+`</td></tr></tbody></table>`);
+        }
     }
     // 列印快拍
     else if (story == "stories/archive") {
@@ -492,7 +510,9 @@
     else if (all_group == "groups_browse") {
         var get_data = get_html.match(/(?<=<div class="_7hkf _3qn7 _61-3 _2fyi _3qng">).*?(?=<\/div>)/g);
         for (var i = 0; i < get_data.length; i++) {
-            var group_name = get_data[i].match(/(?<=<div class=" _52je _52jb _52jh">).*/g);
+            
+            var group_name = get_data[i].match(/(?<=<div class="h3z9dlai ld7irhx5 pbevjfx6 igjjae4c">).*/g);
+            // var group_name = get_data[i].match(/(?<=<div class=" _52je _52jb _52jh">).*/g);
             var group_url = get_data[i].match(/(?<=<a class="_7hkg" href=").*?(?=\/\?ref=group_browse">)/g);
             document.write("<table><tbody><tr><td>" + group_name + "</td><td>https://www.facebook.com" + group_url + "</td></tr></tbody></table>");
         }
