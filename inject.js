@@ -21,6 +21,7 @@
     var conversion_real_id = check_url.match(/\?crealid|%3Fcrealid/g);
     var online = check_url.match(/online/g);
     var check_inactive = check_url.match(/\?inactive/g);
+    var block_user = check_url.match(/\?block/g);
     // 取消好友请求
     if (cancel_request == "friends/center/requests") {
         var inputs = document.getElementsByClassName('_54k8 _52jg _56bs _26vk _2b4n _8yzq _3cqr _8yo0 _56bt');
@@ -98,7 +99,6 @@
     // 自动戳一戳
     else if (pokes == "pokes") {
         var inputs = document.getElementsByClassName('d2edcug0 hpfvmrgz qv66sw1b c1et5uql oi732d6d ik7dh3pa fgxwclzu a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb iv3no6db jq4qci2q a3bd9o3v lrazzd5p bwm1u5wc');
-
         function getRandom(n, m) {
             var num = Math.floor(Math.random() * (m - n + 1) + n)
             return num
@@ -113,7 +113,7 @@
         }
     }
     // 隐藏所有标记
-    else if (hide_all_mark == "?hidemark" || hiden_mark == "%3Fhidemark") {
+    else if (hide_all_mark == "?hidemark" || hide_all_mark == "%3Fhidemark") {
         setInterval(function() {
             var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
             for (var i = 0; i < get_user.length; i++) {
@@ -127,6 +127,13 @@
                 var Mark = get_group_user[i].getElementsByClassName('simplemarker-mark')[0];
                 if (Mark != null) {
                     get_group_user[i].setAttribute("style", "display:none;");
+                } else {}
+            }
+            var get_search_user = document.querySelectorAll(".d2edcug0.glvd648r.o7dlgrpb > div > div");
+            for (var i = 0; i < get_search_user.length; i++) {
+                var Mark = get_search_user[i].getElementsByClassName('simplemarker-mark')[0];
+                if (Mark != null) {
+                    get_search_user[i].setAttribute("style", "display:none;");
                 } else {}
             }
         }, 1500);
@@ -140,7 +147,7 @@
                 try {
                     var Mark_Date = Mark.outerHTML.match(/..\/.*?\/..(?=<)|..\/.*?\/.(?=<)/g);
                 } catch {}
-                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️|🎈|◾️|🔴/);
+                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️|🎈|◾️|◼️|🔴/);
                 try {
                     if (Mark.outerHTML.match(reg)) {
                         var aa = "TRUE";
@@ -161,7 +168,7 @@
                 try {
                     var Mark_Date = Mark.outerHTML.match(/..\/.*?\/..(?=<)|..\/.*?\/.(?=<)/g);
                 } catch {}
-                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️|🎈|◾️|🔴/);
+                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️|🎈|◾️|◼️|🔴/);
                 try {
                     if (Mark.outerHTML.match(reg)) {
                         var aa = "TRUE";
@@ -176,42 +183,77 @@
                     get_group_user[i].setAttribute("style", "display:none;");
                 } else {}
             }
+            var get_search_user = document.querySelectorAll(".d2edcug0.glvd648r.o7dlgrpb > div > div");
+            for (var i = 0; i < get_search_user.length; i++) {
+                var Mark = get_search_user[i].getElementsByClassName('simplemarker-mark')[0];
+                try {
+                    var Mark_Date = Mark.outerHTML.match(/..\/.*?\/..(?=<)|..\/.*?\/.(?=<)/g);
+                } catch {}
+                var reg = RegExp(/😀|💚|💛|🧡|💙|💧|🌳|🐠|🆇|🆆|☸️|☪️️|🕉️|🦖|🈲|👿|🐌|🦐|👤|👶|☸️|☪️️|🕉️|🎈|◾️|◼️|🔴/);
+                try {
+                    if (Mark.outerHTML.match(reg)) {
+                        var aa = "TRUE";
+                    }
+                } catch {
+                    var aa = "FALSE";
+                }
+                var date = new Date();
+                var dateTime = new Date(date.setDate(date.getDate() - 30));
+                var date2 = new Date(20 + Mark_Date);
+                if (Mark != null && dateTime.getTime() < date2.getTime() || aa == "TRUE") {
+                    get_search_user[i].setAttribute("style", "display:none;");
+                } else {}
+            }
+
         }, 1500);
     }
     // 找标记
     else if (find_mark == "?findmark" || find_mark == "%3Ffindmark") {
-        setInterval(function() {
-            var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
-            for (var i = 0; i < get_user.length; i++) {
-                var Mark = get_user[i].getElementsByClassName('simplemarker-mark')[0];
-                var reg = RegExp(/💚|🐠|💧|🌳/);
-                try {
-                    if (Mark.outerHTML.match(reg)) {
-                        var aa = "TRUE";
-                    }
-                } catch {
-                    var aa = "FALSE";
+        var get_user = document.getElementsByClassName('bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr');
+        for (var i = 0; i < get_user.length; i++) {
+            var Mark = get_user[i].getElementsByClassName('simplemarker-mark')[0];
+            var reg = RegExp(/💚|🐠|💧|🌳/);
+            try {
+                if (Mark.outerHTML.match(reg)) {
+                    var aa = "TRUE";
                 }
-                if (aa != "TRUE") {
-                    get_user[i].setAttribute("style", "display:none;");
-                } else {}
+            } catch {
+                var aa = "FALSE";
             }
-            var get_group_user = document.querySelectorAll('div[data-visualcompletion="ignore-dynamic"]')
-            for (var i = 0; i < get_group_user.length; i++) {
-                var Mark = get_group_user[i].getElementsByClassName('simplemarker-mark')[0];
-                var reg = RegExp(/💚|🐠|💧|🌳/);
-                try {
-                    if (Mark.outerHTML.match(reg)) {
-                        var aa = "TRUE";
-                    }
-                } catch {
-                    var aa = "FALSE";
+            if (aa != "TRUE") {
+                get_user[i].setAttribute("style", "display:none;");
+            } else {}
+        }
+        var get_group_user = document.querySelectorAll('div[data-visualcompletion="ignore-dynamic"]');
+        for (var i = 0; i < get_group_user.length; i++) {
+            var Mark = get_group_user[i].getElementsByClassName('simplemarker-mark')[0];
+            var reg = RegExp(/💚|🐠|💧|🌳/);
+            try {
+                if (Mark.outerHTML.match(reg)) {
+                    var aa = "TRUE";
                 }
-                if (aa != "TRUE") {
-                    get_group_user[i].setAttribute("style", "display:none;");
-                } else {}
+            } catch {
+                var aa = "FALSE";
             }
-        }, 1500);
+            if (aa != "TRUE") {
+                get_group_user[i].setAttribute("style", "display:none;");
+            } else {}
+        }
+        var get_search_user = document.querySelectorAll(".d2edcug0.glvd648r.o7dlgrpb > div > div");
+        for (var i = 0; i < get_search_user.length; i++) {
+            var Mark = get_search_user[i].getElementsByClassName('simplemarker-mark')[0];
+            var reg = RegExp(/💚|🐠|💧|🌳/);
+            try {
+                if (Mark.outerHTML.match(reg)) {
+                    var aa = "TRUE";
+                }
+            } catch {
+                var aa = "FALSE";
+            }
+            if (aa != "TRUE") {
+                get_search_user[i].setAttribute("style", "display:none;");
+            } else {}
+        }
     }
     // 检测不活跃账户
     else if (check_inactive == "?inactive" || check_inactive == "%3Finactive") {
@@ -228,6 +270,43 @@
             }
         }
         new_page.document.write("不活跃账号检测完成。");
+    }
+    // 拉黑用户
+    else if (block_user == "?block" || block_user == "%3Fblock") {
+        $(document).ready(function() {
+            facebook_block_user = `
+               <head>
+               <meta charset="utf-8">
+               <script>
+                   function confirm_block() {
+                       var get_block_url = document.getElementById("block_url").value;
+                       var url = get_block_url.match(/https:\\/\\/[A-Za-z0-9&/?=.]+[A-Za-z0-9/]/g);
+                       for (var k = 0; k < url.length; k++) {
+                           (function(k) {
+                               setTimeout(async function() {
+                                   let response = await fetch(url[k])
+                                   let text = await response.text()
+                                   try {
+                                       let facebookID = text.match(/(?<="userID":")([0-9]+)/g)[0]
+                                       window.open("https://m.facebook.com/privacy/touch/block/confirm/?back_uri&bid=" + facebookID + "&source=privacy_settings_page", "_blank")
+                                   } catch {
+                                       document.getElementById("error").innerHTML += "出错: " + url[k] + "<br>";
+                                   }
+                               }, 100 * k);
+                           })(k);
+                       }
+                   }
+               </script>
+               </head>
+            <div id="facebook_block_user" style="position: absolute;left: 50%;top: 50%;-webkit-transform: translate(-50%, -50%);border:1px solid;padding:3px 12px;border-radius:10px;color:#fff;background-color:#99CCFF;z-index:9999;font-size:16px;width:300px;height:200px;">
+            <textarea id="block_url" style="display: block;margin-left: auto;margin-right: auto; margin-top:10px;width:280px;height:145px;resize:none;font-size:16px;" placeholder="请输入链接, 一行一个"></textarea>
+            <button style="float:right;margin-top:4px;border: 1px solid;padding: .3rem .75rem;font-size: .9rem;line-height: 1.5;border-radius: .75rem;color: #fff;background-color: #336699;border-color: #007bff;" onclick="confirm_block()"><b>确认</b></button>
+            <div id="error" style="float:left;background-color:red;"></div>
+ `;
+            if ($("#facebook_block_user").length == 0)
+                $("body").prepend(facebook_block_user);
+        });
+
     }
     // 列印好友
     else if (url_type == "friends") {
@@ -659,7 +738,6 @@
             })(k);
         }
     }
-
     // 点赞列印
     else {
         if (check_version == "ios:url") {
