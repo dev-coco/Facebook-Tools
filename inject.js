@@ -20,6 +20,7 @@
     var conversion_num_id = check_url.match(/\?cnumid|%3Fcnumid/g);
     var conversion_real_id = check_url.match(/\?crealid|%3Fcrealid/g);
     var online = check_url.match(/online/g);
+    var check_inactive = check_url.match(/\?inactive/g);
     // 取消好友请求
     if (cancel_request == "friends/center/requests") {
         var inputs = document.getElementsByClassName('_54k8 _52jg _56bs _26vk _2b4n _8yzq _3cqr _8yo0 _56bt');
@@ -55,11 +56,10 @@
         var get_data = document.getElementsByClassName("_56cx acw");
         new_page = window.open('');
         new_page.document.write(`<p>添加好友数</p>`);
-        for (var i = 0; i < get_data.length; i++)
-        {
+        for (var i = 0; i < get_data.length; i++) {
             var date = get_data[i].outerHTML.match(/(?<=<section class="_56cz _56c.*?">).*?(?=<\/section>)/g)[0];
             var friend_count = get_data[i].getElementsByClassName("img darkTouch profpic").length;
-            new_page.document.write(`<table><tbody><tr><td>`+date+`</td><td>`+friend_count+`</td></tr></tbody></table>`);
+            new_page.document.write(`<table><tbody><tr><td>` + date + `</td><td>` + friend_count + `</td></tr></tbody></table>`);
         }
     }
     // 统计发送好友请求数
@@ -67,11 +67,10 @@
         var get_data = document.getElementsByClassName("_56cx acw");
         new_page = window.open('');
         new_page.document.write(`<p>发送好友请求数</p>`);
-        for (var i = 0; i < get_data.length; i++)
-        {
+        for (var i = 0; i < get_data.length; i++) {
             var date = get_data[i].outerHTML.match(/(?<=<section class="_56cz _56c.*?">).*?(?=<\/section>)/g)[0];
             var friend_requests = get_data[i].getElementsByClassName("_56d3 _50wk").length;
-            new_page.document.write(`<table><tbody><tr><td>`+date+`</td><td>`+friend_requests+`</td></tr></tbody></table>`);
+            new_page.document.write(`<table><tbody><tr><td>` + date + `</td><td>` + friend_requests + `</td></tr></tbody></table>`);
         }
     }
     // 列印快拍
@@ -213,6 +212,22 @@
                 } else {}
             }
         }, 1500);
+    }
+    // 检测不活跃账户
+    else if (check_inactive == "?inactive" || check_inactive == "%3Finactive") {
+        var get_user = document.getElementsByClassName("bp9cbjyn ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi n1f8r23x rq0escxv j83agx80 bi6gxh9e discj3wi hv4rvrfc ihqw7lf3 dati1w0a gfomwglr");
+        new_page = window.open('');
+        for (var i = 0; i < get_user.length; i++) {
+            try {
+                var check_url = get_user[i].outerHTML.match(/(?<=gpro0wi8" href=").*?(?=" role="link")/g)[0];
+            } catch {
+                try {
+                    var in_active = get_user[i].outerHTML.match(/(?<=lrazzd5p oo9gr5id".*?>).*?(?=<\/span>)/g)[0];
+                    new_page.document.write(in_active + "<br>");
+                } catch {}
+            }
+        }
+        new_page.document.write("不活跃账号检测完成。");
     }
     // 列印好友
     else if (url_type == "friends") {
@@ -512,7 +527,7 @@
     else if (all_group == "groups_browse") {
         var get_data = get_html.match(/(?<=<div class="_7hkf _3qn7 _61-3 _2fyi _3qng">).*?(?=<\/div>)/g);
         for (var i = 0; i < get_data.length; i++) {
-            
+
             var group_name = get_data[i].match(/(?<=<div class="h3z9dlai ld7irhx5 pbevjfx6 igjjae4c">).*/g);
             // var group_name = get_data[i].match(/(?<=<div class=" _52je _52jb _52jh">).*/g);
             var group_url = get_data[i].match(/(?<=<a class="_7hkg" href=").*?(?=\/\?ref=group_browse">)/g);
@@ -644,6 +659,7 @@
             })(k);
         }
     }
+
     // 点赞列印
     else {
         if (check_version == "ios:url") {
