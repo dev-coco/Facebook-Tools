@@ -3,7 +3,7 @@
     "name": "Facebook小工具",
     "description": "功能详情请看选项说明页面。",
     "author": "dev-coco",
-    "version": "2.3.9",
+    "version": "2.4.0",
     "browser_action": {
       "default_icon": "icon.png"
     },
