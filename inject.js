@@ -22,6 +22,7 @@
     var online = check_url.match(/online/g);
     var check_inactive = check_url.match(/\?inactive/g);
     var block_user = check_url.match(/\?block/g);
+    var auto_like = check_url.match(/\?autolike/g);
     // 取消好友请求
     if (cancel_request == "friends/center/requests") {
         var inputs = document.getElementsByClassName('_54k8 _52jg _56bs _26vk _2b4n _8yzq _3cqr _8yo0 _56bt');
@@ -99,6 +100,7 @@
     // 自动戳一戳
     else if (pokes == "pokes") {
         var inputs = document.getElementsByClassName('d2edcug0 hpfvmrgz qv66sw1b c1et5uql oi732d6d ik7dh3pa fgxwclzu a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb iv3no6db jq4qci2q a3bd9o3v lrazzd5p bwm1u5wc');
+
         function getRandom(n, m) {
             var num = Math.floor(Math.random() * (m - n + 1) + n)
             return num
@@ -693,6 +695,30 @@
             var today = (date.getMonth() + 1) + "/" + date.getDate();
             var str = "<table><tbody><tr><td>" + today + "</td><td></td><td></td><td>" + group_location + "</td><td>" + religion + "</td><td>" + group_name + "</td><td></td><td>" + url + "</td><td>" + all_member + "</td><td>" + last_month_posts + "</td><td>" + new_member + "</td><td>" + group_status + "</td></tr></tbody></table>"
             document.write(eval("`" + str + "`"));
+        }
+    }
+    // 首页自动点赞
+    else if (auto_like == "?autolike") {
+        var inputs = document.getElementsByClassName('_15ko _77li touchable');
+        function getRandom(n, m) {
+            var num = Math.floor(Math.random() * (m - n + 1) + n)
+            return num
+        }
+        var ramdom_number = getRandom(3000, 10000);
+        console.log("总数：" + inputs.length);
+        for (var i = 0; i < inputs.length; i++) {
+            (function(i) {
+                setTimeout(function() {
+                    try {
+                        inputs[i].outerHTML.match(/_77la/g)[0];
+                        console.log("已赞过" + [i + 1]);
+                    } catch {
+                        console.log("已点赞：" + [i + 1]);
+                        inputs[i].click();
+                    }
+
+                }, ramdom_number * i);
+            })(i);
         }
     }
     // 转换数字ID
