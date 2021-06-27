@@ -10,18 +10,19 @@
     var count_requests = check_url.match(/sentfriendrequests/g);
     var count_add_friends = check_url.match(/category_key=friends/g);
     var story = check_url.match(/stories\/archive/g);
-    var pokes = check_url.match(/pokes/g);
+    var pokes = check_url.match(/pokes999/g);
     var group = check_url.match(/groups/g);
     var watch_party = check_url.match(/\/wp\/|watchparty/g);
     var all_group = check_url.match(/groups_browse/g);
     var hiden_mark = check_url.match(/\?add|%3Fadd/g);
     var hide_all_mark = check_url.match(/\?hidemark|%3Fhidemark/g);
     var find_mark = check_url.match(/\?findmark|%3Ffindmark/g);
-    var conversion_tool = check_url.match(/\?ctool|%3Fctool/g);
+    var conversion_tool = check_url.match(/\?ctool999|%3Fctool999/g);
     var online = check_url.match(/online/g);
     var check_inactive = check_url.match(/\?inactive/g);
-    var block_user = check_url.match(/\?block|%3Fblock/g);
-    var auto_like = check_url.match(/\?autolike/g);
+    var block_user = check_url.match(/\?block999|%3Fblock999/g);
+    var auto_like = check_url.match(/\?autolike999/g);
+    var editor_pages = check_url.match(/editor999/g);
     // 取消好友请求
     if (cancel_request == "friends/center/requests") {
         $(document).ready(function() {
@@ -118,7 +119,7 @@
         new_page.document.write(`<p>添加好友数</p>`);
         for (var i = 0; i < get_data.length; i++) {
             var date = get_data[i].outerHTML.match(/(?<=<section class="_56cz _56c.*?">).*?(?=<\/section>)/g)[0];
-            var friend_count = get_data[i].getElementsByClassName("img darkTouch profpic").length;
+            var friend_count = get_data[i].getElementsByClassName("ib").length;
             new_page.document.write(`<table><tbody><tr><td>` + date + `</td><td>` + friend_count + `</td></tr></tbody></table>`);
         }
     }
@@ -150,8 +151,9 @@
         }
     }
     // 自动戳一戳
-    else if (pokes == "pokes") {
-        var pokes_button = document.getElementsByClassName('oajrlxb2 s1i5eluu gcieejh5 bn081pho humdl8nn izx4hr6d rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys d1544ag0 qt6c0cv9 tw6a2znq i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l beltcj47 p86d2i9g aot14ch1 kzx2olss cbu4d94t taijpn5t ni8dbmo4 stjgntxs k4urcfbm tv7at329');
+    else if (pokes == "pokes999") {
+        var pokes_button = document.getElementsByClassName('d2edcug0 hpfvmrgz qv66sw1b c1et5uql oi732d6d ik7dh3pa ht8s03o8 a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb iv3no6db jq4qci2q a3bd9o3v lrazzd5p bwm1u5wc');
+        // var pokes_button = document.getElementsByClassName('oajrlxb2 s1i5eluu gcieejh5 bn081pho humdl8nn izx4hr6d rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys d1544ag0 qt6c0cv9 tw6a2znq i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l beltcj47 p86d2i9g aot14ch1 kzx2olss cbu4d94t taijpn5t ni8dbmo4 stjgntxs k4urcfbm tv7at329');
 
         function getRandom(n, m) {
             var num = Math.floor(Math.random() * (m - n + 1) + n);
@@ -326,7 +328,7 @@
         new_page.document.write("停用帐户检测完成");
     }
     // 拉黑用户
-    else if (block_user == "?block" || block_user == "%3Fblock") {
+    else if (block_user == "?block999" || block_user == "%3Fblock999") {
         $(document).ready(function() {
             facebook_block_user = `
                           <head>
@@ -413,13 +415,15 @@
                 var nowDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
                 for (var i = 0; i < get_user_data.length; i++) {
                     var url = get_user_data[i].match(/http.+(?=" role="link")/g)[0];
-                    var uesr_name = get_user_data[i].match(/(?<=dir="auto">).+/g)[0].replace(/<div class.*?div>/g, "");
                     try {
-                        var user_mark = get_user_data[i].match(/(?<=dir="auto">).+/g)[0].match(/(?<=<div class=".*?>).*?(?=<\/div)/g, )[0];
-                    } catch {
-                        var user_mark = "";
-                    }
-                    document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + get_self_name + "</td><td>" + get_account_name + "</td><td>" + [i + 1] + "</td><td>" + uesr_name + "</td><td>" + url + "</td><td>" + user_mark + "</td></tr></tbody></table>");
+                        var uesr_name = get_user_data[i].match(/(?<=dir="auto">).+/g)[0].replace(/<div class.*?div>/g, "");
+                        try {
+                            var user_mark = get_user_data[i].match(/(?<=dir="auto">).+/g)[0].match(/(?<=<div class=".*?>).*?(?=<\/div)/g)[0];
+                        } catch {
+                            var user_mark = "";
+                        }
+                        document.write("<table><tbody><tr><td>" + nowDate + "</td><td>" + get_self_name + "</td><td>" + get_account_name + "</td><td>" + [i + 1] + "</td><td>" + uesr_name + "</td><td>" + url + "</td><td>" + user_mark + "</td></tr></tbody></table>");
+                    } catch {}
                 }
             }
         }
@@ -447,6 +451,7 @@
         }
     }
     // 开包厢辅助
+    /*
     else if (watch_party == "watchparty" || watch_party == "/wp/") {
         $(document).ready(function() {
             new_button = `
@@ -679,6 +684,7 @@
                 $("body").prepend(new_button);
         });
     }
+    */
     // 列印所有小组
     else if (all_group == "groups_browse") {
         var get_data = get_html.match(/(?<=<div class="_7hkf _3qn7 _61-3 _2fyi _3qng">).*?(?=<\/a><\/div>)/g);
@@ -704,9 +710,10 @@
             document.close();
             for (var k = 0; k < new_page_data.length; k++) {
                 var user_avatar = new_page_data[k].match(/(?<=xlink:href=").*?(?=")/g);
-                var user_name = new_page_data[k].match(/(?<=<div class="q9uorilb"><a class.*?>).*?(?=<\/a><\/div>)/g)[0].replace(/<div class.*?>|<\/div>/g, "");
+                var user_name = new_page_data[k].match(/(?<=<div class="q9uorilb"><a class.*?)>.*?<\/a>(?=<\/div>)/g)[0].replace(/<.*?div>|<\/a>|>/g, "");
+                var user_mark = new_page_data[k].match(/(?<=<div class="q9uorilb"><a class.*?)>.*?<\/a>(?=<\/div>)/g)[0].replace(/>.*?>|<\/div/g,"");
                 var user_link = "https://www.facebook.com/" + new_page_data[k].match(/(?<=lrazzd5p" href="\/groups\/.*?\/user\/).*?(?=\/.__cf|.amp)/g);
-                document.write("<table><tbody><tr><td>" + [k + 1] + "</td><td style='font-size:0px;'>=IMAGE(\"" + user_avatar + "\")</td><td>" + like_type + "</td><td>" + user_name + "</td><td>" + user_link + "</td></tr></tbody></table>");
+                document.write("<table><tbody><tr><td>" + [k + 1] + "</td><td style='font-size:0px;'>=IMAGE(\"" + user_avatar + "\")</td><td>" + like_type + "</td><td>" + user_name + "</td><td>" + user_link + "</td><td>" + user_mark + "</td></tr></tbody></table>");
             }
         } else {
             // Group Info
@@ -754,7 +761,7 @@
         }
     }
     // 首页自动点赞
-    else if (auto_like == "?autolike") {
+    else if (auto_like == "?autolike999") {
         var para = document.createElement("div");
         var element = document.querySelector("body");
         element.appendChild(para);
@@ -816,7 +823,7 @@
         }
     }
     // 转换数字ID
-    else if (conversion_tool == "?ctool" || conversion_tool == "%3Fctool") {
+    else if (conversion_tool == "?ctool999" || conversion_tool == "%3Fctool999") {
         $(document).ready(function() {
             remove_suggest = `
                           <head>
@@ -850,13 +857,16 @@
                                       <td>
                                          <div style="text-align:center;">
                                             <input checked="checked" id="output_id" type="checkbox"><span clas="font-style" style="color:black;">序号</span>
+                                            <input class="font-style" id="delay_time" style="width:94px;border:none;text-align:center;" value="1500" type="text" placeholder="设置延时">
+                                            <button class="button font-style" onclick="url_to_id()">链接 &gt;&gt; ID</button>
+                                            <button class="button font-style" onclick="id_to_url()">ID &gt;&gt; 链接</button>
+                                            <button class="button font-style" onclick="id_to_pages()">ID &gt;&gt; 专页</button>
+                                            <button class="button font-style" onclick="group_members()">小组人数</button>
+                                            <button class="button font-style" onclick="post_status()">帖文互动数</button>
+                                            <button class="button font-style" onclick="copy_result()">复制结果</button>
+                                            <button class="button font-style" onclick="data_clear()">清空</button>
+                                            <p class="font-style" id="copy_status" style="text-align:center;color:black;height:21px;"></p>
                                          </div>
-                                         <input class="font-style" id="delay_time" style="width:94px;border:none;text-align:center;" value="1500" type="text" placeholder="设置延时">
-                                         <button class="button font-style" onclick="url_to_id()">链接 &gt;&gt; ID</button>
-                                         <button class="button font-style" onclick="id_to_url()">ID &gt;&gt; 链接</button>
-                                         <button class="button font-style" onclick="copy_result()">复制结果</button>
-                                         <button class="button font-style" onclick="data_clear()">清空</button>
-                                         <p class="font-style" id="copy_status" style="text-align:center;color:black;height:21px;"></p>
                                       </td>
                                       <td><textarea id="output_data" class="input-content" placeholder="输出内容，不可编辑" readonly></textarea></td>
                                    </tr>
@@ -872,24 +882,34 @@
                                  var output_id_status = document.getElementById("output_id").checked;
                                  var get_delay_time = document.getElementById("delay_time").value;
                                  document.getElementById("output_data").value = "";
-                                 var url = get_input_data.match(/https:[A-Za-z0-9/.]+[A-Za-z0-9/]/g);
+                                 var url = get_input_data.match(/.+/g);
                                  for (var k = 0; k < url.length; k++) {
                                      (function(k) {
                                          setTimeout(async function() {
-                                             let response = await fetch(url[k])
-                                             let text = await response.text()
                                              try {
-                                                 let facebookID = text.match(/(?<="userID":")([0-9]+)/g)[0]
+                                                 var profile = url[k].match(/profile/g)[0];
+                                                 var user_id = url[k].match(/(?<=id=).+[0-9]/g)[0];
                                                  if (output_id_status == true) {
-                                                     document.getElementById("output_data").value += [k] + "\\t" + facebookID + "\\n";
+                                                     document.getElementById("output_data").value += [k+1] + "\\t" + user_id + "\\n";
                                                  } else {
-                                                     document.getElementById("output_data").value += facebookID + "\\n";
+                                                     document.getElementById("output_data").value += user_id + "\\n";
                                                  }
                                              } catch {
-                                                 if (output_id_status == true) {
-                                                     document.getElementById("output_data").value += [k] + "\\n";
-                                                 } else {
-                                                     document.getElementById("output_data").value += "\\n";
+                                                 let response = await fetch(url[k])
+                                                 let text = await response.text()
+                                                 try {
+                                                     let facebookID = text.match(/(?<="userID":")([0-9]+)/g)[0]
+                                                     if (output_id_status == true) {
+                                                         document.getElementById("output_data").value += [k+1] + "\\t" + facebookID + "\\n";
+                                                     } else {
+                                                         document.getElementById("output_data").value += facebookID + "\\n";
+                                                     }
+                                                 } catch {
+                                                     if (output_id_status == true) {
+                                                         document.getElementById("output_data").value += [k+1] + "\\n";
+                                                     } else {
+                                                         document.getElementById("output_data").value += "\\n";
+                                                     }
                                                  }
                                              }
                                          }, get_delay_time * k);
@@ -913,14 +933,14 @@
                                              let real_url = response.url.replace(/\\/$ /g, "");
                                              try {
                                                  if (output_id_status == true) {
-                                                     document.getElementById("output_data").value += [k] + "\\t" + real_url + "\\n";
+                                                     document.getElementById("output_data").value += [k+1] + "\\t" + real_url + "\\n";
                                                  } else {
                                                      document.getElementById("output_data").value += real_url + "\\n";
                                                  }
                                              } catch {
 
                                                  if (output_id_status == true) {
-                                                     document.getElementById("output_data").value += [k] + "\\t识别不到\\n";
+                                                     document.getElementById("output_data").value += [k+1] + "\\t识别不到\\n";
                                                  } else {
                                                      document.getElementById("output_data").value += "识别不到\\n";
                                                  }
@@ -929,62 +949,192 @@
                                      })(k);
                                  }
                              }
+                                      
+                            function id_to_pages() {
+                                 var get_input_data = document.getElementById("input_data").value;
+                                 var output_id_status = document.getElementById("output_id").checked;
+                                 var get_delay_time = document.getElementById("delay_time").value;
+                                 document.getElementById("output_data").value = "";
+                                 var url = get_input_data.match(/.+/g);
+                                 for (var k = 0; k < url.length; k++) {
+                                     (function(k) {
+                                         setTimeout(async function() {
+                                             let response = await fetch("https://www.facebook.com/browse/fanned_pages/?id=" + url[k])
+                                             let text = await response.text()
+                                             var get_data = text.match(/<li class="fbProfileBrowserListItem.*?<\\/li>/g);
+                                             for (var i = 0; i < get_data.length; i++) {
+                                                 var page_url = get_data[i].match(/(?<=href=").*?(?=")/g)[0].replace(/\\?fref.+/g, "").replace(/(?<=om\\/).*&#x.*;.*?(?=[0-9])/g, "");
+                                                 var page_name = get_data[i].match(/(?<=data-gt=".*">).*?(?=<\\/a>)/g)[0].replace(/<.*>/g, "");
+                                                 var page_detail = get_data[i].match(/(?<=<div class="fsm fwn fcg">).*?(?=<\\/div>)/g)[0].replace(/<span.*span>/g, "");
+                                                 if (page_url.indexOf("/pages/") != -1 == true) {
+                                                     var page_type = "地标";
+                                                 } else {
+                                                     var page_type = "专页";
+                                                 }
+                                                 if (output_id_status == true) {
+                                                     document.getElementById("output_data").value += [i + 1] + "\\t" + page_name + "\\t" + page_url + "\\t" + page_detail + "\\t" + page_type + "\\n";
+                                                 } else {
+                                                     document.getElementById("output_data").value += page_name + "\\t\\t" + page_url + "\\t\\t" + page_detail + "\\t" + page_type + "\\n";
+                                                 }
+                                             }
+                                         }, get_delay_time * k);
+                                     })(k);
+                                 }
+                            }
 
-                             function data_clear() {
-                                 document.getElementById("input_data").value="";
-                                 document.getElementById("output_data").value="";
-                             }
+                            async function group_members() {
+                                if(window.location.href.indexOf("www") > -1) {
+                                    document.getElementById("output_data").value += "请换成手机版页面后再使用";
+                                    return;
+                                }
+                                var get_input_data = document.getElementById("input_data").value;
+                                var output_id_status = document.getElementById("output_id").checked;
+                                var get_delay_time = document.getElementById("delay_time").value;
+                                document.getElementById("output_data").value = "";
+                                var url = get_input_data.match(/.+/g);
+                                for (const element of url) {
+                                    await new Promise(resolve => {setTimeout(resolve, get_delay_time);});
+                                    let response = await fetch("https://m.facebook.com/"+(element+"/").match(/groups\\/.*?\\//g)[0].replace(/\\/$/g,"")+"?view=info")
+                                    let text = await response.text()
+                                    try {
+                                        var group_data = text.match(/(?<=aria-hidden="true">).*?(?= 位成[员員]<\\/h3>)/g)[0].replace(/.+>|,/g,"");
+                                    } catch {
+                                        var group_data = text.match(/...........(?= Members<\\/h3>)/g)[0].replace(/.+>|,/g, "");
+                                    }
+                                    if (output_id_status == true) {
+                                        document.getElementById("output_data").value += group_data + "\\t";
+                                    }
+                                    else {
+                                        document.getElementById("output_data").value += group_data + "\\t";
+                                    }
+                                }
+                                for (const element of url) {
+                                    if (output_id_status == true) {
+                                        document.getElementById("output_data").value += "=OFFSET(INDIRECT(SUBSTITUTE(ADDRESS(ROW(),COLUMN()),\\"$\\",\\"\\")),0,-"+url.length+")-OFFSET(INDIRECT(SUBSTITUTE(ADDRESS(ROW(),COLUMN()),\\"$\\",\\"\\")),-1,-"+url.length+")\t";
+                                    }
+                                    else {}
+                                }
+                            }
+                                                                                                             
+                            async function post_status() {
+                                if(window.location.href.indexOf("www") > -1) {
+                                    document.getElementById("output_data").value += "请换成手机版页面后再使用";
+                                    return;
+                                }
+                                var get_input_data = document.getElementById("input_data").value;
+                                var output_id_status = document.getElementById("output_id").checked;
+                                var get_delay_time = document.getElementById("delay_time").value;
+                                document.getElementById("output_data").value = "";
+                                var url = get_input_data.match(/.+/g);
+                                var i = 0;
+                                for (const element of url) {
+                                    if(element.indexOf("pending_posts") > -1) {
+                                        var likes = 0;
+                                        var comment = 0;
+                                        var share = 0;
+                                    } else {
+                                        await new Promise(resolve => {setTimeout(resolve, get_delay_time);});
+                                        let response = await fetch(element.replace(/www/g,"m"))
+                                        let text = await response.text()
+                                        try {
+                                            var likes = text.match(/(?<=reactioncount:).*?(?=,)/g)[0];
+                                            var comment = text.match(/(?<=comment_count:).*?(?=,)/g)[0];
+                                            var share = text.match(/(?<=share_count:).*?(?=,)/g)[0];
+                                        } catch {
+                                            var likes = 0;
+                                            var comment = 0;
+                                            var share = 0;
+                                        }
+                                    }
+                                    if (output_id_status == true) {
+                                        i++
+                                        document.getElementById("output_data").value += [i] + "\\t"+likes+"/"+comment+"/"+share+"\\n";
+                                    } else {
+                                        document.getElementById("output_data").value += likes+"/"+comment+"/"+share+"\\n";
+                                    }
+                                }
+                            }
+                            
+                            function data_clear() {
+                                document.getElementById("input_data").value="";
+                                document.getElementById("output_data").value="";
+                            }
 
-                             function copy_result() {
-                                 var output = document.getElementById("output_data");
-                                 output.select(); // 选中文本
-                                 document.execCommand("copy"); // 执行浏览器复制命令
-                                 document.getElementById("copy_status").innerHTML = "复制成功";
-                                 setTimeout(function() {
-                                     document.getElementById("copy_status").innerHTML = "";
-                                 }, 4000);
-                             }
+                            function copy_result() {
+                                var output = document.getElementById("output_data");
+                                output.select();
+                                document.execCommand("copy");
+                                document.getElementById("copy_status").innerHTML = "复制成功";
+                                setTimeout(function() {
+                                    document.getElementById("copy_status").innerHTML = "";
+                                }, 4000);
+                            }
                           </script>`;
             if ($("#remove_suggest").length == 0)
                 $("body").prepend(remove_suggest);
         });
         scroll(0, 0);
     }
+    // 地点编辑
+    else if (editor_pages == "editor999") {
+        function getRandom(n, m) {
+            var num = Math.floor(Math.random() * (m - n + 1) + n);
+            return num;
+        }
+        var ramdom_time = getRandom(5000, 10000);
+        var click_function = document.getElementsByClassName("rq0escxv l9j0dhe7 du4w35lb j83agx80 pfnyh3mw taijpn5t bp9cbjyn owycx6da btwxx1t3 kt9q3ron ak7q8e6j isp2s0ed ri5dt5u2 rt8b4zig n8ej3o3l agehan2d sk4xxmp2 ni8dbmo4 stjgntxs d1544ag0 tw6a2znq tdjehn4e tv7at329");
+        for (var i = 0; i < 200; i++) {
+            (function(i) {
+                var ramdom_number = getRandom(0, 2);
+                setTimeout(function() {
+                    try {
+                        click_function[ramdom_number].click();
+                    } catch {}
+                }, ramdom_time * i);
+            })(i);
+        }
+    }
     // 点赞列印
     else {
         if (check_version == "ios:url") {
             // Old Facebook
-            var get_page_data = get_html.match(/<div class="_5i_p" id="u_.*?_.*?">.*?"><\/span><\/div><\/div>/g)[0];
-            document.write(get_page_data);
-            var get_new_html = document.documentElement.outerHTML;
-            var get_new_page_data = get_new_html.match(/(?<=<a class="_5i_s _8o _8r lfloat _ohe" title=").*?\?id=.*?(?=&amp;extragetparams)/g);
-            document.open();
-            document.clear();
-            document.close();
             var like_type = prompt("请输入点赞类型", "");
-            for (var k = 0; k < get_new_page_data.length; k++) {
-                var user_id = get_new_page_data[k].match(/(?<=user\.php\?id=)[0-9].+/g)[0];
-                var user_name = get_new_page_data[k].match(/.*?(?=")/g)[0];
-                var user_url = get_new_page_data[k].match(/http.+(?=(\?|&amp;)fref)/g)[0];
-                document.write("<table><tbody><tr><td>" + [k] + "</td><td>=IMAGE(\"http://graph.facebook.com/" + user_id + "/picture?width=1080\")</td><td>" + like_type + "</td><td><a href=\"" + user_url + "\">" + user_name + "</a></td><td>" + user_url + "</td></tr></tbody></table>");
+            if (like_type == null) {} else {
+                var get_page_data = get_html.match(/<div class="_5i_p" id="u_.*?_.*?">.*?"><\/span><\/div><\/div>/g)[0];
+                document.write(get_page_data);
+                var get_new_html = document.documentElement.outerHTML;
+                var get_new_page_data = get_new_html.match(/(?<=<a class="_5i_s _8o _8r lfloat _ohe" title=").*?\?id=.*?(?=&amp;extragetparams)/g);
+                document.open();
+                document.clear();
+                document.close();
+                for (var k = 0; k < get_new_page_data.length; k++) {
+                    var user_id = get_new_page_data[k].match(/(?<=user\.php\?id=)[0-9].+/g)[0];
+                    var user_name = get_new_page_data[k].match(/.*?(?=")/g)[0];
+                    var user_url = get_new_page_data[k].match(/http.+(?=(\?|&amp;)fref)/g)[0];
+                    document.write("<table><tbody><tr><td>" + [k] + "</td><td>=IMAGE(\"http://graph.facebook.com/" + user_id + "/picture?width=1080\")</td><td>" + like_type + "</td><td><a href=\"" + user_url + "\">" + user_name + "</a></td><td>" + user_url + "</td></tr></tbody></table>");
+                }
             }
         } else {
             // New Facebook
-            var get_page_data = get_html.match(/<div class="j83agx80 cbu4d94t buofh1pr l9j0dhe7">.*?k4urcfbm"><\/div><\/div><\/div>/g);
-            for (var i = 0; i < get_page_data.length; i++) {
-                document.write(get_page_data[i]);
-            }
-            var get_new_html = document.documentElement.outerHTML;
-            var new_page_data = get_new_html.match(/<div class="ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi a8c37x1j">.*?<div class="q9uorilb">.*?<\/a><\/div>/g);
-            document.open();
-            document.clear();
-            document.close();
             var like_type = prompt("请输入点赞类型", "");
-            for (var k = 0; k < new_page_data.length; k++) {
-                var user_avatar = new_page_data[k].match(/(?<=xlink:href=").*?(?=")/g)[0];
-                var user_name = new_page_data[k].match(/(?<=<div class="q9uorilb"><a class.*?>).*?(?=<\/a><\/div>)/g)[0].replace(/<div class.*?>|<\/div>/g, "");
-                var user_link = new_page_data[k].match(/(?<=lrazzd5p" href=").*?(?=.__cf|.amp)/g)[0];
-                document.write("<table><tbody><tr><td>" + [k + 1] + "</td><td style='font-size:0px;'>=IMAGE(\"" + user_avatar + "\")</td><td>" + like_type + "</td><td>" + user_name + "</td><td>" + user_link + "</td></tr></tbody></table>");
+            if (like_type == null) {} else {
+                                      try {
+                                      new_page.document.write('');
+                                      } catch {
+                                      new_page=window.open('');
+                                      }
+                var get_page_data = get_html.match(/<div class="j83agx80 cbu4d94t buofh1pr l9j0dhe7">.*?k4urcfbm"><\/div><\/div><\/div>/g);
+                var get_new_html = get_page_data[get_page_data.length-1];
+                var new_page_data = get_new_html.match(/<div class="ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi a8c37x1j">.*?<div class="q9uorilb">.*?<\/a><\/div>/g);
+                for (var k = 0; k < new_page_data.length; k++) {
+                    var user_avatar = new_page_data[k].match(/(?<=xlink:href=").*?(?=")/g)[0];
+                    // var user_name = new_page_data[k].match(/(?<=<div class="q9uorilb"><a class.*?>).*?(?=<\/a><\/div>)/g)[0].replace(/<.*?div>/g, "");
+                    // var user_mark = new_page_data[k].match(/(?<=<div class="q9uorilb"><a class.*?>).*?(?=<\/a><\/div>)/g)[0].replace(/(?<=<\/div>).+/g,"").replace(/<.*?>/g,"");
+                    var user_name = new_page_data[k].match(/(?<=<div class="q9uorilb"><a class.*?)>.*?<\/a>(?=<\/div>)/g)[0].replace(/<.*?div>|<\/a>|>/g, "");
+                    var user_mark = new_page_data[k].match(/(?<=<div class="q9uorilb"><a class.*?)>.*?<\/a>(?=<\/div>)/g)[0].replace(/>.*?>|<\/div/g,"");
+                    var user_link = new_page_data[k].match(/(?<=lrazzd5p" href=").*?(?=.__cf|.amp)/g)[0].replace(/.+\.com\/|groups.+user\/|\//g,"");
+                    new_page.document.write("<table><tbody><tr><td>" + [k + 1] + "</td><td style='font-size:0px;'>=IMAGE(\"" + user_avatar + "\")</td><td>" + like_type + "</td><td>" + user_name + "</td><td>https://www.facebook.com/" + user_link + "</td><td>" + user_mark + "</td></tr></tbody></table>");
+                }
             }
         }
     }

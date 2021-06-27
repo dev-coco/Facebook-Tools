@@ -3,14 +3,12 @@
     "name": "Facebook小工具",
     "description": "功能详情请看选项说明页面。",
     "author": "dev-coco",
-    "version": "3.0.0",
+    "version": "3.0.8",
     "browser_action": {
       "default_icon": "icon.png"
     },
     "icons": {
-      "16": "icon16.png",
-      "48": "icon48.png",
-      "128": "icon128.png"
+      "128": "icon.png"
     },
     "background" : {
         "scripts" : ["background.js"],
