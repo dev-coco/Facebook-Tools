@@ -856,15 +856,15 @@
                                       <td><textarea id="input_data" class="input-content" placeholder="请输入内容, 一行一个"></textarea></td>
                                       <td>
                                          <div style="text-align:center;">
-                                            <input checked="checked" id="output_id" type="checkbox"><span clas="font-style" style="color:black;">序号</span>
-                                            <input class="font-style" id="delay_time" style="width:94px;border:none;text-align:center;" value="1500" type="text" placeholder="设置延时">
-                                            <button class="button font-style" onclick="url_to_id()">链接 &gt;&gt; ID</button>
-                                            <button class="button font-style" onclick="id_to_url()">ID &gt;&gt; 链接</button>
-                                            <button class="button font-style" onclick="id_to_pages()">ID &gt;&gt; 专页</button>
-                                            <button class="button font-style" onclick="group_members()">小组人数</button>
-                                            <button class="button font-style" onclick="post_status()">帖文互动数</button>
-                                            <button class="button font-style" onclick="copy_result()">复制结果</button>
-                                            <button class="button font-style" onclick="data_clear()">清空</button>
+                                            <input checked="checked" id="output_id" type="checkbox"><span clas="font-style" style="color:black;">序号</span><br>
+                                            <input class="font-style" id="delay_time" style="width:94px;border:none;text-align:center;" value="1500" type="text" placeholder="设置延时"><br>
+                                            <button class="button font-style" onclick="url_to_id()">链接 &gt;&gt; ID</button><br>
+                                            <button class="button font-style" onclick="id_to_url()">ID &gt;&gt; 链接</button><br>
+                                            <button class="button font-style" onclick="id_to_pages()">ID &gt;&gt; 专页</button><br>
+                                            <button class="button font-style" onclick="group_members()">小组人数</button><br>
+                                            <button class="button font-style" onclick="post_status()">帖文互动数</button><br>
+                                            <button class="button font-style" onclick="copy_result()">复制结果</button><br>
+                                            <button class="button font-style" onclick="data_clear()">清空</button><br>
                                             <p class="font-style" id="copy_status" style="text-align:center;color:black;height:21px;"></p>
                                          </div>
                                       </td>
